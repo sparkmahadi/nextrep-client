@@ -18,34 +18,36 @@ code {
     monospace;
 }
 
-.active{
+.active {
   background-color: rgb(85, 142, 165);
   padding: 7px;
   border-radius: 7px;
 }
 
-.custom-align{
+.custom-align {
   position: fixed;
-top: 50%; 
-left: 50%;
-transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 
-.font-primary{
+.font-primary {
   font-family: 'Montserrat', sans-serif;
 }
 
-.font-secondary{
+.font-secondary {
   font-family: 'Open Sans', sans-serif;
 }
 
-.bg-tertiary{
-    background-color: #53ba83;
+.bg-tertiary {
+  background-color: #53ba83;
 }
-.bg-fourth{
-    background-color: #9fd86b;
+
+.bg-fourth {
+  background-color: #9fd86b;
 }
-.bg-fifth{
-    background-color: #0c0636;
+
+.bg-fifth {
+  background-color: #0c0636;
 }

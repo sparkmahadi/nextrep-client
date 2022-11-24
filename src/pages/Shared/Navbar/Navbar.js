@@ -30,7 +30,7 @@ const Navbar = () => {
             .catch(e => console.error(e))
     }
 
-    
+
     return (
         <div className="bg-primary font-secondary">
             <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -56,6 +56,21 @@ const Navbar = () => {
                                 Home
                             </NavLink>
                         </li>
+
+                        {
+                            user?.uid &&
+                            <li>
+                                <NavLink
+                                    to="/dashboard"
+                                    aria-label="dashboard"
+                                    title="dashboard"
+                                    className={`font-medium tracking-wide text-white hover:text-sky-300`}
+                                >
+                                    Dashboard
+                                </NavLink>
+                            </li>
+                        }
+
                         <li>
                             <NavLink to='/blog'
                                 aria-label="Blog"
@@ -206,24 +221,19 @@ const Navbar = () => {
                                                     Home
                                                 </NavLink>
                                             </li>
-                                            <li>
-                                                <NavLink to='/courses'
-                                                    aria-label="Courses"
-                                                    title="Courses"
-                                                    className="font-medium tracking-wide"
-                                                >
-                                                    Courses
-                                                </NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to='/faq'
-                                                    aria-label="FAQ"
-                                                    title="FAQ"
-                                                    className="font-medium tracking-wide"
-                                                >
-                                                    FAQ
-                                                </NavLink>
-                                            </li>
+                                            {
+                                                user?.uid &&
+                                                <li>
+                                                    <NavLink
+                                                        to="/dashboard"
+                                                        aria-label="dashboard"
+                                                        title="dashboard"
+                                                        className={`font-medium tracking-wide text-white hover:text-sky-300`}
+                                                    >
+                                                        Dashboard
+                                                    </NavLink>
+                                                </li>
+                                            }
                                             <li>
                                                 <NavLink to='/blog'
                                                     aria-label="Blog"
@@ -272,6 +282,7 @@ const Navbar = () => {
                                             </li>
                                         </ul>
                                     </nav>
+                                    
                                 </div>
                             </div>
                         )}

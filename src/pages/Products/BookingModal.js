@@ -17,6 +17,7 @@ const BookingModal = ({item, setItem}) => {
         const meetingLocation = form.location.value;
 
         const booking = {
+            productName: name,
             buyerName,
             buyerEmail,
             buyerPhone,
@@ -40,7 +41,7 @@ const BookingModal = ({item, setItem}) => {
                 console.log(data);
                 if (data.acknowledged) {
                     setItem(null);
-                    toast.success('Booking confirmed');
+                    toast.success('Bike is booked');
                 }
                 else {
                     toast.error(data.message);
