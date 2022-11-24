@@ -25,3 +25,13 @@ code {
 .font-secondary{
   font-family: 'Open Sans', sans-serif;
 }
+
+.bg-tertiary{
+    background-color: #53ba83;
+}
+.bg-fourth{
+    background-color: #9fd86b;
+}
+.bg-fifth{
+    background-color: #0c0636;
+}

@@ -6,19 +6,14 @@ const Categories = () => {
     const categories = useLoaderData();
     console.log(categories);
     return (
-        <div>
-            <div className="hero" style={{ backgroundImage: `url("https://placeimg.com/1000/800/arch")` }}>
-                
-                <div className="hero-content text-center text-neutral-content">
-                    <div className='grid grid-cols-6 gap-5'>
+        <div className='"px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
+                    <div className='grid grid-cols-6 gap-6'>
 
                         {
                             categories.map(category => <CategoriesDetails key={category._id} category={category}></CategoriesDetails>)
                         }
 
                     </div>
-                </div>
-            </div>
         </div>
     );
 };
