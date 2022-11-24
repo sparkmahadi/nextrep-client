@@ -1,13 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CategoriesDetails = ({ category }) => {
+    const {img, brandName, brandId} = category;
     return (
-        <div className="card card-compact w-44 bg-base-100 shadow-xl">
-            <figure><img className='' src={category.img} alt="brands" /></figure>
-            <div className="card-body">
-                <h2 className="card-title text-gray-900 justify-center">{category.brandName}</h2>
+        <Link to={`/category/${brandId}`}>
+            <div className="card card-compact w-44 bg-base-100 shadow-xl">
+                <figure><img className='' src={img} alt="brands" /></figure>
+                <div className="card-body">
+                    <h2 className="card-title text-gray-900 justify-center">{brandName}</h2>
+                </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

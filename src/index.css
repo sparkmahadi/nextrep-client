@@ -18,6 +18,20 @@ code {
     monospace;
 }
 
+.active{
+  background-color: rgb(85, 142, 165);
+  padding: 7px;
+  border-radius: 7px;
+}
+
+.custom-align{
+  position: fixed;
+top: 50%; 
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+
 .font-primary{
   font-family: 'Montserrat', sans-serif;
 }

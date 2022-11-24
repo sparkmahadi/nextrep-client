@@ -32,7 +32,7 @@ const Navbar = () => {
 
     
     return (
-        <div className="bg-primary font-secondary fixed top-0 left-0 right-0 z-10">
+        <div className="bg-primary font-secondary">
             <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
                 <div className="relative flex items-center justify-between">
                     <Link to='/'
@@ -54,26 +54,6 @@ const Navbar = () => {
                                 className={`font-medium tracking-wide text-white hover:text-sky-300`}
                             >
                                 Home
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/courses"
-                                aria-label="Courses"
-                                title="Courses"
-                                className={`font-medium tracking-wide text-white hover:text-sky-300`}
-                            >
-                                Courses
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to='/faq'
-                                aria-label="FAQ"
-                                title="FAQ"
-                                className="font-medium tracking-wide text-white hover:text-sky-300"
-                            >
-                                FAQ
                             </NavLink>
                         </li>
                         <li>
