@@ -8,9 +8,9 @@ const Banner = () => {
                 <div className="hero-content text-center">
                     <div className="">
                         <p className='mb-4 text-xl font-bold text-red-500 uppercase'>Making Your Dreams Come True</p>
-                        <h2 className="mb-5 lg:text-7xl font-bold font-primary">FIND YOUR MOTORCYCLE</h2>
-                        <p className="mb-5 lg:text-3xl">Buy or sell your motorcycle with our growing community.</p>
-                        <button className="btn btn-primary">Get Started</button>
+                        <h2 className="mb-5 lg:text-7xl text-white font-bold font-primary">FIND YOUR MOTORCYCLE</h2>
+                        <p className="mb-5 lg:text-3xl text-white">Buy or sell your motorcycle with our growing community.</p>
+                        <button className="btn btn-secondary text-white">Get Started</button>
                     </div>
                 </div>
             </div>

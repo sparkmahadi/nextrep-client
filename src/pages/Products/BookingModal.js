@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/UserContext';
 
-const BookingModal = ({item, setItem}) => {
-    const { location, mobile, sellerName, name, resalePrice } = item;
+const BookingModal = ({ item, setItem }) => {
+    const { location, mobile, sellerName, name, resalePrice, sellerEmail, _id } = item;
 
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
-    const handleBooking =(event) =>{
+    const handleBooking = (event) => {
         event.preventDefault();
         const form = event.target;
 
@@ -22,12 +22,15 @@ const BookingModal = ({item, setItem}) => {
             buyerEmail,
             buyerPhone,
             sellerName,
+            sellerEmail,
+            productId: _id,
             sellerPhone: mobile,
             sellerLocation: location,
             price: resalePrice,
             meetingLocation
         }
 
+        const booked = {status: 'Sold'}
 
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
@@ -42,6 +45,18 @@ const BookingModal = ({item, setItem}) => {
                 if (data.acknowledged) {
                     setItem(null);
                     toast.success('Bike is booked');
+
+                    // have to set product as sold
+
+                    // finding the product first
+                    fetch(`http://localhost:5000/products/${_id}`,{
+                        method: 'PUT',
+                        headers:
+                        {'content-type' : 'application/json'},
+                        body: JSON.stringify(booked)
+                    })
+                    .then(res=>res.json())
+                    .then(data=>console.log(data))
                 }
                 else {
                     toast.error(data.message);
@@ -71,6 +86,9 @@ const BookingModal = ({item, setItem}) => {
                         <input className='btn btn-primary w-full' type="submit" value="Submit" />
                     </form>
 
+                <div className="modal-action">
+                    <label htmlFor="product-booking-modal" className="btn btn-accent w-full">Cancel</label>
+                </div>
                 </div>
             </div>
         </div>

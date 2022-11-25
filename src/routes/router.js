@@ -2,15 +2,18 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import DashboardLayout from '../layouts/DashboardLayout';
 import Main from '../layouts/Main';
+import AddProduct from '../pages/Dashboard/AddProduct/AddProduct';
 import AllBuyers from '../pages/Dashboard/AllBuyers/AllBuyers';
 import AllSellers from '../pages/Dashboard/AllSellers/AllSellers';
 import MyOrders from '../pages/Dashboard/MyOrders/MyOrders';
+import MyProducts from '../pages/Dashboard/MyProducts/MyProducts';
 import Home from '../pages/Home/Home/Home';
 import Login from '../pages/Logging/Login/Login';
 import Products from '../pages/Products/Products';
 import Register from './../pages/Logging/Register/Register';
 import ResetPassword from './../pages/Logging/ResetPassword/ResetPassword';
 import PrivateRoute from './PrivateRoute';
+import CheckingRoute from './CheckingRoute';
 
 export const router = createBrowserRouter([
     {
@@ -48,24 +51,32 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
                 path: '/dashboard',
-                element: <MyOrders></MyOrders>
+                element: <CheckingRoute><MyOrders></MyOrders></CheckingRoute>
             },
             {
                 path: '/dashboard/myorders',
-                element: <MyOrders></MyOrders>
+                element: <CheckingRoute><MyOrders></MyOrders></CheckingRoute>
             },
             {
                 path: '/dashboard/sellers',
-                element: <AllSellers></AllSellers>
+                element: <CheckingRoute><AllSellers></AllSellers></CheckingRoute>
             },
             {
                 path: '/dashboard/buyers',
-                element: <AllBuyers></AllBuyers>
-            }
+                element: <CheckingRoute><AllBuyers></AllBuyers></CheckingRoute>
+            },
+            {
+                path: '/dashboard/addproduct',
+                element: <CheckingRoute><AddProduct></AddProduct></CheckingRoute>
+            },
+            {
+                path: '/dashboard/myproducts',
+                element: <CheckingRoute><MyProducts></MyProducts></CheckingRoute>
+            },
         ]
     }
 ])

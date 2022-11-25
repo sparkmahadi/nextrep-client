@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
+import { toast } from 'react-hot-toast';
 
 const Register = () => {
     const [error, setError] = useState('');
     const { createNewUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -25,6 +27,9 @@ const Register = () => {
                 form.reset();
                 handleUpdateUserProfile(name, photoURL);
                 saveUser(name, email, accountType);
+                toast.success("Account Registered Successfully");
+                navigate('/');
+
             })
             .catch(e => {
                 console.error(e);
@@ -54,7 +59,6 @@ const Register = () => {
         .then(res => res.json())
         .then(data =>{
             console.log(data);
-            // setCreatedUserEmail(email);
         })
     }
 
