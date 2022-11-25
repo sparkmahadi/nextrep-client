@@ -31,7 +31,8 @@ const MyProducts = () => {
                 .then(data => {
                     console.log(data)
                     if (data.modifiedCount > 0) {
-                        toast.success(`${name} is advertised successfully`)
+                        toast.success(`${name} is advertised successfully`);
+                        refetch();
                     }
                 })
         }

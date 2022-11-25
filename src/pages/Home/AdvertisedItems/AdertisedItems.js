@@ -24,7 +24,7 @@ const AdertisedItems = () => {
             <div className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
                 <Toaster></Toaster>
 
-                <div className='grid lg:grid-cols-2 xl:grid-cols-3 gap-5 font-secondary'>
+                <div className='grid lg:grid-cols-2 3xl:grid-cols-3 gap-5 font-secondary'>
                     {
                         advertisedProducts.map(product => <ProductsDetails
                             key={product._id}

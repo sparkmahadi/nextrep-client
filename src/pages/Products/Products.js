@@ -27,7 +27,7 @@ const Products = () => {
             <Toaster></Toaster>
             <h2 className='text-gray-900 md:text-3xl font-bold text-center mb-5 uppercase'>Products</h2>
 
-            <div className='grid lg:grid-cols-2 xl:grid-cols-3 gap-5 font-secondary'>
+            <div className='grid lg:grid-cols-2 3xl:grid-cols-3 gap-5 font-secondary justify-center'>
                 {
                     products.map(product => <ProductsDetails
                         key={product._id}

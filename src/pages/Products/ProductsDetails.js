@@ -5,7 +5,7 @@ const ProductsDetails = ({ product, setItem }) => {
     const { condition, description, engineCapacity, img, location, mobile, name, originalPrice, postedTime, purchasedYear, resalePrice, totalRun, usedYear, sellerName, sellerVerified } = product;
     return (
         <div className="card card-compact w-full bg-base-100 shadow-xl text-gray-800">
-            <figure><img className='h-60 md:h-80 w-full' src={img} alt="bike" /></figure>
+            <figure><img className='w-full h-[500px]' src={img} alt="bike" /></figure>
             <div className="card-body">
                 <h2 className="text-center md:text-2xl font-bold">{name}</h2>
                 <div className='sm:flex justify-around text-lg lg:text-sm'>
@@ -23,7 +23,7 @@ const ProductsDetails = ({ product, setItem }) => {
                         </p>
                     </div>
                     <div className="divider divider-horizontal"></div>  
-                    <div className=''>
+                    <div className='sm:w-1/2'>
                         <p><span className='font-bold'>Condition: </span>{condition}</p>
                         <p><span className='font-bold'>Engine Capacity:</span> {engineCapacity}cc</p>
                         <p><span className='font-bold'>Original Price:</span> {originalPrice} TK</p>

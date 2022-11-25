@@ -2,10 +2,10 @@ import React from 'react';
 
 const PowerfulBike = () => {
     return (
-        <div>
+        <div className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
             <div className="hero">
                 <div className="hero-content flex-col lg:flex-row-reverse">
-                    <img src="https://i.ibb.co/7j9chXC/kawasaki-ninja.png" alt='' className="max-w-2xl rounded-lg" />
+                    <img src="https://i.ibb.co/7j9chXC/kawasaki-ninja.png" alt='' className="max-w-2xl w-full rounded-lg" />
                     <div>
                         <h3 className="text-3xl">Kawasaki Ninja H2R</h3>
                         <p className="py-4">Some Kawasaki Ninjas (like the 400) are widely regarded as beginner sport bikes—but the Ninja H2R is no such beast. Make no mistake: the H2R has always been a mean, track-only machine, and that hasn’t changed one bit for the 2022 Kawasaki lineup.
