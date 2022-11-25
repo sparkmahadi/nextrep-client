@@ -34,7 +34,7 @@ const AdertisedItems = () => {
 
                 {
                     item &&
-                    <BookingModal item={item} setItem={setItem}></BookingModal>
+                    <BookingModal item={item} setItem={setItem} refetch={refetch}></BookingModal>
                 }
             </div>
         </div>

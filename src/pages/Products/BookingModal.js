@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/UserContext';
 
-const BookingModal = ({ item, setItem }) => {
+const BookingModal = ({ item, setItem, refetch }) => {
     const { location, mobile, sellerName, name, resalePrice, sellerEmail, _id } = item;
 
     const { user } = useContext(AuthContext);
@@ -55,7 +55,10 @@ const BookingModal = ({ item, setItem }) => {
                         body: JSON.stringify(booked)
                     })
                     .then(res=>res.json())
-                    .then(data=>console.log(data))
+                    .then(data=>{
+                        console.log(data);
+                        refetch();
+                    })
                 }
                 else {
                     toast.error(data.message);

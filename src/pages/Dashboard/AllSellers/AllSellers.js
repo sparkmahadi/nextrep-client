@@ -11,24 +11,37 @@ const AllSellers = () => {
             return data;
         }
     });
-    const handleVerifyUser = (email, name) =>{
+    
+    const handleVerifyUser = (email, name) => {
         const agree = window.confirm(`Are you sure to verifiy '${name}' with email: '${email}'?`);
-        const verified = {verified: true}
-        if(agree){
-            fetch(`http://localhost:5000/users/${email}`,{
-                        method: 'PUT',
-                        headers:
-                        {'content-type' : 'application/json'},
-                        body: JSON.stringify(verified)
-                    })
-                    .then(res=>res.json())
-                    .then(data=>{
-                        console.log(data)
-                        if(data.modifiedCount > 0){
-                            refetch();
-                            toast.success(`${name} is verified successfully`)
-                        }
-                    })
+        const verified = { verified: true }
+        if (agree) {
+            fetch(`http://localhost:5000/users/${email}`, {
+                method: 'PUT',
+                headers:
+                    { 'content-type': 'application/json' },
+                body: JSON.stringify(verified)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.modifiedCount > 0) {
+                        fetch(`http://localhost:5000/products/sellerVerification/${email}`, {
+                            method: 'PUT',
+                            headers:
+                                { 'content-type': 'application/json' },
+                            body: JSON.stringify(verified)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                if(data.modifiedCount > 0){
+                                    refetch();
+                                    toast.success(`${name} is verified successfully`);
+                                }
+                            })
+                    }
+                })
         }
     }
     return (
@@ -55,8 +68,8 @@ const AllSellers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.accountType}</td>
-                                <td onClick={()=>handleVerifyUser(user.email, user.name)}>
-                                    {user.verified ? 'Verified' : <button className='btn-sm btn btn-primary'>Verify</button>}
+                                <td onClick={() => handleVerifyUser(user.email, user.name)}>
+                                <button disabled={user.verified} className='btn-sm btn btn-primary'>{user.verified ? 'Verified' : 'Verify'}</button>
                                 </td>
                                 <td>
                                     <button className='bg-red-600 p-1 rounded-lg text-white'>

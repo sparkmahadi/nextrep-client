@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AllBuyers = () => {
     const { data: users = [], refetch } = useQuery({
@@ -10,9 +11,31 @@ const AllBuyers = () => {
             return data;
         }
     });
-    console.log(users);
+
+    const handleVerifyUser = (email, name) => {
+        const agree = window.confirm(`Are you sure to verifiy '${name}' with email: '${email}'?`);
+        const verified = { verified: true }
+        if (agree) {
+            fetch(`http://localhost:5000/users/${email}`, {
+                method: 'PUT',
+                headers:
+                    { 'content-type': 'application/json' },
+                body: JSON.stringify(verified)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.modifiedCount > 0) {
+                        refetch();
+                        toast.success(`${name} is verified successfully`);
+                    }
+                })
+        }
+    }
+    
     return (
         <div className='min-h-screen'>
+            <Toaster></Toaster>
             <div className="overflow-x-auto">
                 <table className="lg:table lg:w-full">
 
@@ -23,7 +46,6 @@ const AllBuyers = () => {
                             <th>Email</th>
                             <th>Account Type</th>
                             <th>Verification</th>
-                            <th>Admin</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -35,12 +57,9 @@ const AllBuyers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.accountType}</td>
-                                <td>{user.verified ? 'Verified' : 'Not Verified'}</td>
-                                <td>
-                                    <button className='bg-secondary p-1 rounded-lg text-white'>
-                                        {user.isAdmin ? 'Admin' : 'Make'}
-                                    </button>
-                                </td>
+                                <td onClick={() => handleVerifyUser(user.email, user.name)}>
+                                    <button disabled={user.verified} className='btn-sm btn btn-primary'>{user.verified ? 'Verified' : 'Verify'}</button>
+                                    </td>
                                 <td>
                                     <button className='bg-red-600 p-1 rounded-lg text-white'>
                                         Delete
