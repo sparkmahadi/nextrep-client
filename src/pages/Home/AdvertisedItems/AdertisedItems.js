@@ -18,7 +18,6 @@ const AdertisedItems = () => {
     })
     return (
         <div>
-            <h2 className='text-3xl text-center font-bold uppercase'>Advertised Items</h2>
             <div className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
                 <Toaster></Toaster>
 

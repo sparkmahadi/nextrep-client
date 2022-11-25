@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/UserContext';
 import useCheckAccType from '../hooks/useCheckAccType';
 import Footer from '../pages/Shared/Footer/Footer';
 import Navbar from '../pages/Shared/Navbar/Navbar';
 import './DashboardLayout.css';
+import { useEffect } from 'react';
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     const [accType] = useCheckAccType(user?.email);
-    console.log(accType);
+    const navigate = useNavigate();
+
     return (
         <div className=''>
             <Navbar></Navbar>

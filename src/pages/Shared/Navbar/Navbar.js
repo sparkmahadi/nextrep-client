@@ -108,7 +108,7 @@ const Navbar = () => {
                                 {
                                     user?.uid ?
                                         <div className="flex items-center">
-                                            <Link to='/profile'>
+                                            <Link to='/dashboard/profile'>
                                                 {
                                                     user?.photoURL ?
                                                         <div className="flex items-center" title={user?.displayName ? user.displayName : 'No Name'}>
@@ -135,7 +135,7 @@ const Navbar = () => {
                             {
                                 user?.uid ?
                                     <div className="flex items-center text-white">
-                                        <Link to='/profile'>
+                                        <Link to='/dashboard/profile'>
                                             {
                                                 user?.photoURL ?
                                                     <div className="flex items-center" title={user?.displayName}>

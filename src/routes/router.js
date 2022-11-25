@@ -14,6 +14,7 @@ import Register from './../pages/Logging/Register/Register';
 import ResetPassword from './../pages/Logging/ResetPassword/ResetPassword';
 import PrivateRoute from './PrivateRoute';
 import CheckingRoute from './CheckingRoute';
+import Profile from '../pages/Dashboard/Profile/Profile';
 
 export const router = createBrowserRouter([
     {
@@ -54,7 +55,11 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <CheckingRoute><MyOrders></MyOrders></CheckingRoute>
+                element: <CheckingRoute><Profile></Profile></CheckingRoute>
+            },
+            {
+                path: '/dashboard/profile',
+                element: <CheckingRoute><Profile></Profile></CheckingRoute>
             },
             {
                 path: '/dashboard/myorders',
