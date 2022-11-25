@@ -122,7 +122,7 @@ const AddProduct = () => {
                             <option value="Yamaha">Yamaha</option>
                             <option value="Suzuki">Suzuki</option>
                             <option value="Lifan">Lifan</option>
-                            <option value="Bazaz">Bazaz</option>
+                            <option value="Bajaj">Bajaj</option>
                         </select>
                     </div>
 

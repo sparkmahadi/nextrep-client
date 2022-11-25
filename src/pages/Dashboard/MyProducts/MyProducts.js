@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
+import { toast, Toaster } from 'react-hot-toast';
 
 const MyProducts = () => {
     const {user, loading} = useContext(AuthContext);
@@ -15,9 +16,44 @@ const MyProducts = () => {
             return data;
         }
     });
-    console.log(myProducts);
+
+    const handleAdvertiseProduct = (id, name)=>{
+        const agree = window.confirm(`Are you sure to advertise ${name}?`);
+        const advertised = {advertised: true};
+        if(agree){
+            fetch(`http://localhost:5000/products/${id}`,{
+                        method: 'PUT',
+                        headers:
+                        {'content-type' : 'application/json'},
+                        body: JSON.stringify(advertised)
+                    })
+                    .then(res=>res.json())
+                    .then(data=>{
+                        console.log(data)
+                        if(data.modifiedCount > 0){
+                            toast.success(`${name} is advertised successfully`)
+                        }
+                    })
+        }
+    }
+
+    const handleDeleteProduct = (id, name) =>{
+        const agree = window.confirm(`Are you sure to delete ${name}?`);
+        if(agree){
+            fetch(`http://localhost:5000/products/${id}`,{
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                toast.success(`${name} is deleted successfully`)
+            })
+        }
+
+    }
     return (
         <div className='min-h-screen'>
+            <Toaster></Toaster>
             <div className="overflow-x-auto">
                 <table className="lg:table lg:w-full">
 
@@ -44,9 +80,9 @@ const MyProducts = () => {
                                 <td>{pd.resalePrice}</td>
                                 <td>{pd.status}</td>
                                 <td>
-                                    <button className='btn-primary p-1 lg:p-2 rounded-lg text-white'>Advertise</button>
+                                    <button onClick={()=>handleAdvertiseProduct(pd._id, pd.name)} disabled={pd.status === 'Sold'} className={`btn-primary p-1 lg:p-2 rounded-lg text-white ${pd.status === 'Sold' ? 'line-through' : undefined}`}>Advertise</button>
                                 </td>
-                                <td><button className='bg-red-600 p-1 lg:p-2 rounded-lg text-white'>Delete</button></td>
+                                <td><button onClick={()=>handleDeleteProduct(pd._id, pd.name)} className='bg-red-600 p-1 lg:p-2 rounded-lg text-white'>Delete</button></td>
                             </tr>)
                         }
 

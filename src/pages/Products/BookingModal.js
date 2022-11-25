@@ -48,7 +48,6 @@ const BookingModal = ({ item, setItem }) => {
 
                     // have to set product as sold
 
-                    // finding the product first
                     fetch(`http://localhost:5000/products/${_id}`,{
                         method: 'PUT',
                         headers:
