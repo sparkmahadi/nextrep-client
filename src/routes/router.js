@@ -16,6 +16,7 @@ import PrivateRoute from './PrivateRoute';
 import CheckingRoute from './CheckingRoute';
 import Profile from '../pages/Dashboard/Profile/Profile';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import Blog from '../pages/Blog/Blog';
 
 export const router = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
                 path: '/category/:id',
                 element: <PrivateRoute><Products></Products></PrivateRoute>
             },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
+            }
         ],
     },
     {
