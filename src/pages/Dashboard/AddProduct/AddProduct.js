@@ -4,21 +4,25 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const AddProduct = () => {
     const {user} = useContext(AuthContext);
-
+    const [uploading, setUploading] = useState(false);
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const imgHostKey = process.env.REACT_APP_imgbb_key;
-    console.log(imgHostKey);
 
     const handleAddProduct = (data) => {
-
+        setUploading(true);
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
 
-        const url = `https://api.imgbb.com/1/upload?key=7371ad88e02d46173fd5251181daa069`;
+        const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`;
+        console.log(url);
 
         fetch(url, {
             method: 'POST',
@@ -85,7 +89,9 @@ const AddProduct = () => {
                 .then(res => res.json())
                 .then(result =>{
                     console.log(result);
+                    setUploading(false);
                     toast.success(`${name} is added successfully`);
+                    navigate('/dashboard/myproducts')
                 })
                 
             }
@@ -99,7 +105,9 @@ const AddProduct = () => {
             <Toaster></Toaster>
             <div className=''>
                 <h2 className="text-3xl text-center">Add A Product</h2>
-
+                {
+                    uploading && <div className='custom-align'><Spinner></Spinner></div>
+                }
                 <form onSubmit={handleSubmit(handleAddProduct)} className='mx-auto max-w-xl'>
 
                     <div className="max-w-3xl flex justify-between items-start my-5">

@@ -46,7 +46,8 @@ const MyProducts = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                toast.success(`${name} is deleted successfully`)
+                toast.success(`${name} is deleted successfully`);
+                refetch();
             })
         }
 
@@ -80,7 +81,10 @@ const MyProducts = () => {
                                 <td>{pd.resalePrice}</td>
                                 <td>{pd.status}</td>
                                 <td>
-                                    <button onClick={()=>handleAdvertiseProduct(pd._id, pd.name)} disabled={pd.status === 'Sold'} className={`btn-primary p-1 lg:p-2 rounded-lg text-white ${pd.status === 'Sold' ? 'line-through' : undefined}`}>Advertise</button>
+                                    <button onClick={()=>handleAdvertiseProduct(pd._id, pd.name)} disabled={pd.status === 'Sold'} className={`p-1 lg:p-2 rounded-lg text-white ${pd.status === 'Sold' ? 'line-through' : undefined}
+                                    ${pd.advertised ? 'btn-secondary' : 'btn-primary'}`}>
+                                        {pd.advertised ? 'Advertised' : 'Advertise'}
+                                        </button>
                                 </td>
                                 <td><button onClick={()=>handleDeleteProduct(pd._id, pd.name)} className='bg-red-600 p-1 lg:p-2 rounded-lg text-white'>Delete</button></td>
                             </tr>)
