@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
 import { toast } from 'react-hot-toast';
 
@@ -7,7 +7,8 @@ const Register = () => {
     const [error, setError] = useState('');
     const { createNewUser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
@@ -28,8 +29,7 @@ const Register = () => {
                 handleUpdateUserProfile(name, photoURL);
                 saveUser(name, email, accountType);
                 toast.success("Account Registered Successfully");
-                navigate('/');
-
+                navigate(from, { replace: true });
             })
             .catch(e => {
                 console.error(e);
@@ -64,7 +64,7 @@ const Register = () => {
 
     return (
         <div>
-            <h2 data-aos="fade-left" data-aos-duration="1000" className='bg-sky-600 p-2 text-white text-center text-2xl font-semibold'>Registration...</h2>
+            <h2 data-aos="fade-left" data-aos-duration="1000" className='bg-secondary p-2 text-white text-center text-2xl font-semibold uppercase'>Registration</h2>
             <form data-aos="fade-right" data-aos-duration="1000" onSubmit={handleSubmit} className='container mx-auto bg-white px-10 py-10 rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
 
                 <div className="mb-6 flex justify-center items-center gap-5 p-5">
@@ -95,7 +95,7 @@ const Register = () => {
                     <input type="password" name='password' id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l block w-full p-2.5" placeholder='Enter Your Password' required />
                 </div>
                 <p className='text-red-600 mb-2'>{error}</p>
-                <p className='pb-2'>Already have an account? Please <Link className='text-blue-700 font-semibold' to='/login'>Login</Link> Now!</p>
+                <p className='pb-2'>Already have an account? Please <Link className='text-secondary font-semibold' to='/login'>Login</Link> Now!</p>
 
                 <button type="submit" className="text-white bg-secondary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5">Register</button>
             </form>

@@ -44,6 +44,10 @@ const AllSellers = () => {
                 })
         }
     }
+
+    const handleDeleteUser = user =>{
+        console.log(user);
+    }
     return (
         <div className='min-h-screen'>
             <Toaster></Toaster>
@@ -72,7 +76,7 @@ const AllSellers = () => {
                                 <button disabled={user.verified} className='btn-sm btn btn-primary'>{user.verified ? 'Verified' : 'Verify'}</button>
                                 </td>
                                 <td>
-                                    <button className='bg-red-600 p-1 rounded-lg text-white'>
+                                    <button onClick={()=>handleDeleteUser(user)} className='bg-red-600 p-1 rounded-lg text-white'>
                                         Delete
                                     </button>
                                 </td>

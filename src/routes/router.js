@@ -15,6 +15,7 @@ import ResetPassword from './../pages/Logging/ResetPassword/ResetPassword';
 import PrivateRoute from './PrivateRoute';
 import CheckingRoute from './CheckingRoute';
 import Profile from '../pages/Dashboard/Profile/Profile';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
 
 export const router = createBrowserRouter([
     {
@@ -82,5 +83,9 @@ export const router = createBrowserRouter([
                 element: <CheckingRoute><MyProducts></MyProducts></CheckingRoute>
             },
         ]
+    },
+    {
+        path: '*',
+        element: <ErrorPage></ErrorPage>
     }
 ])

@@ -81,9 +81,9 @@ const BookingModal = ({ item, setItem, refetch }) => {
 
                         <input name="price" type="text" defaultValue={resalePrice} disabled placeholder="Email Address" className="input-bordered text-lg" />
 
-                        <input name="phone" type="text" placeholder="Your Mobile Number" className="text-lg input-bordered" />
+                        <input name="phone" type="text" placeholder="Your Mobile Number" className="text-lg input-bordered" required/>
 
-                        <input name="location" type="text" placeholder="Meeting Location" className="text-lg input-bordered" />
+                        <input name="location" type="text" placeholder="Meeting Location" className="text-lg input-bordered" required/>
                         <br />
                         <input className='btn btn-primary w-full' type="submit" value="Submit" />
                     </form>

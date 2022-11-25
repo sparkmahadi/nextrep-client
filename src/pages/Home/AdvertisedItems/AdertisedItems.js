@@ -4,10 +4,10 @@ import { useState } from 'react';
 import BookingModal from '../../Products/BookingModal';
 import { useQuery } from '@tanstack/react-query';
 import ProductsDetails from '../../Products/ProductsDetails';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const AdertisedItems = () => {
     const [item, setItem] = useState(null);
-    // const advertised = true;
     const {data: advertisedProducts = [], refetch, isLoading} = useQuery({
         queryKey: ['advertisedProducts'],
         queryFn: async () =>{
@@ -16,6 +16,9 @@ const AdertisedItems = () => {
             return data;
         }
     })
+    if(isLoading){
+        return <div className='custom-align'><Spinner></Spinner></div>
+    }
     return (
         <div>
             <div className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>

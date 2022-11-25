@@ -5,7 +5,7 @@ import { AuthContext } from '../../../contexts/UserContext';
 import { toast, Toaster } from 'react-hot-toast';
 
 const MyProducts = () => {
-    const {user, loading} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const url = `http://localhost:5000/myProducts?email=${user?.email}`;
 
     const { data: myProducts = [], refetch } = useQuery({
@@ -17,38 +17,38 @@ const MyProducts = () => {
         }
     });
 
-    const handleAdvertiseProduct = (id, name)=>{
+    const handleAdvertiseProduct = (id, name) => {
         const agree = window.confirm(`Are you sure to advertise ${name}?`);
-        const advertised = {advertised: true};
-        if(agree){
-            fetch(`http://localhost:5000/products/${id}`,{
-                        method: 'PUT',
-                        headers:
-                        {'content-type' : 'application/json'},
-                        body: JSON.stringify(advertised)
-                    })
-                    .then(res=>res.json())
-                    .then(data=>{
-                        console.log(data)
-                        if(data.modifiedCount > 0){
-                            toast.success(`${name} is advertised successfully`)
-                        }
-                    })
+        const advertised = { advertised: true };
+        if (agree) {
+            fetch(`http://localhost:5000/products/${id}`, {
+                method: 'PUT',
+                headers:
+                    { 'content-type': 'application/json' },
+                body: JSON.stringify(advertised)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.modifiedCount > 0) {
+                        toast.success(`${name} is advertised successfully`)
+                    }
+                })
         }
     }
 
-    const handleDeleteProduct = (id, name) =>{
+    const handleDeleteProduct = (id, name) => {
         const agree = window.confirm(`Are you sure to delete ${name}?`);
-        if(agree){
-            fetch(`http://localhost:5000/products/${id}`,{
+        if (agree) {
+            fetch(`http://localhost:5000/products/${id}`, {
                 method: 'DELETE'
             })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                toast.success(`${name} is deleted successfully`);
-                refetch();
-            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    toast.success(`${name} is deleted successfully`);
+                    refetch();
+                })
         }
 
     }
@@ -80,16 +80,19 @@ const MyProducts = () => {
                                 <td>{pd.postedTime}</td>
                                 <td>{pd.resalePrice}</td>
                                 <td>{pd.status}</td>
-                                <td>
-                                    <button onClick={()=>handleAdvertiseProduct(pd._id, pd.name)} disabled={pd.status === 'Sold'} className={`p-1 lg:p-2 rounded-lg text-white ${pd.status === 'Sold' ? 'line-through' : undefined}
-                                    ${pd.advertised ? 'btn-secondary' : 'btn-primary'}`}>
-                                        {pd.advertised ? 'Advertised' : 'Advertise'}
-                                        </button>
-                                </td>
-                                <td><button onClick={()=>handleDeleteProduct(pd._id, pd.name)} className='bg-red-600 p-1 lg:p-2 rounded-lg text-white'>Delete</button></td>
+                                {pd.status === 'Available' &&
+                                    <td>
+                                        {
+                                            pd.advertised ?
+                                                <button className='p-1 lg:p-2 rounded-lg btn-accent'>Advertised</button>
+                                                :
+                                                <button onClick={() => handleAdvertiseProduct(pd._id, pd.name)} className={`p-1 lg:p-2 rounded-lg btn-secondary`}> Advertise </button>
+                                        }
+                                    </td>}
+
+                                <td><button onClick={() => handleDeleteProduct(pd._id, pd.name)} className='bg-red-600 p-1 lg:p-2 rounded-lg text-white'>Delete</button></td>
                             </tr>)
                         }
-
                     </tbody>
                 </table>
             </div>
