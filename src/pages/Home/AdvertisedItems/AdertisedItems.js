@@ -20,7 +20,11 @@ const AdertisedItems = () => {
         return <div className='custom-align'><Spinner></Spinner></div>
     }
     return (
-        <div>
+        <>
+        {
+            advertisedProducts.length > 0 &&
+            <div>
+            <h2 className='text-3xl font-bold text-center mt-6 uppercase'>Advertised Items</h2>
             <div className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
                 <Toaster></Toaster>
 
@@ -40,6 +44,8 @@ const AdertisedItems = () => {
                 }
             </div>
         </div>
+        }
+        </>
     );
 };
 

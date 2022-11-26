@@ -28,11 +28,9 @@ const BookingModal = ({ item, setItem, refetch }) => {
             sellerLocation: location,
             price: resalePrice,
             meetingLocation
-        }
+        }       
 
-        const booked = {status: 'Sold'}
-
-        fetch('http://localhost:5000/bookings', {
+        fetch(`http://localhost:5000/bookings?email=${user?.email}&productId=${_id}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -44,21 +42,7 @@ const BookingModal = ({ item, setItem, refetch }) => {
                 console.log(data);
                 if (data.acknowledged) {
                     setItem(null);
-                    toast.success('Bike is booked');
-
-                    // have to set product as sold
-
-                    fetch(`http://localhost:5000/products/${_id}`,{
-                        method: 'PUT',
-                        headers:
-                        {'content-type' : 'application/json'},
-                        body: JSON.stringify(booked)
-                    })
-                    .then(res=>res.json())
-                    .then(data=>{
-                        console.log(data);
-                        refetch();
-                    })
+                    toast.success('Bike is booked');                    
                 }
                 else {
                     toast.error(data.message);

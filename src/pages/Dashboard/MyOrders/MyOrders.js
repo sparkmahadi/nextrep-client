@@ -12,11 +12,16 @@ const MyOrders = () => {
     const { data: orders = [] } = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
-            const res = await fetch(url);
+            const res = await fetch(url,{
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
     })
+    console.log(orders);
     return (
         <div className='min-h-screen'>
             <div className="overflow-x-auto">
@@ -29,6 +34,7 @@ const MyOrders = () => {
                             <th>Price</th>
                             <th>Meeting Location</th>
                             <th>Seller</th>
+                            <th>Pay</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +46,9 @@ const MyOrders = () => {
                                 <td>{order.price}</td>
                                 <td>{order.meetingLocation}</td>
                                 <td>{order.sellerName}</td>
+                                <td>
+                                    <button className='btn btn-secondary btn-sm'>Pay Now</button>
+                                </td>
                             </tr>)
                         }
 

@@ -17,6 +17,8 @@ import CheckingRoute from './CheckingRoute';
 import Profile from '../pages/Dashboard/Profile/Profile';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import Blog from '../pages/Blog/Blog';
+import Spinner from '../components/Spinner/Spinner';
+import ReportedItems from '../pages/Dashboard/ReportedItems/ReportedItems';
 
 export const router = createBrowserRouter([
     {
@@ -87,10 +89,18 @@ export const router = createBrowserRouter([
                 path: '/dashboard/myproducts',
                 element: <CheckingRoute><MyProducts></MyProducts></CheckingRoute>
             },
+            {
+                path: '/dashboard/reporteditems',
+                element: <CheckingRoute><ReportedItems></ReportedItems></CheckingRoute>
+            },
         ]
     },
     {
         path: '*',
         element: <ErrorPage></ErrorPage>
+    },
+    {
+        path: '/loading',
+        element: <Spinner></Spinner>
     }
 ])

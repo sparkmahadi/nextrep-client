@@ -2,13 +2,23 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
 import { FcGoogle } from 'react-icons/fc';
+import useSetToken from '../../../hooks/useSetToken';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const Login = () => {
     const [error, setError] = useState('');
-    const { logIn, logInWithGoogle } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const { logIn, logInWithGoogle, loading } = useContext(AuthContext);
+    const [userEmail, setUserEmail] = useState('');
+    console.log(userEmail);
+    const [token] = useSetToken(userEmail);
     const location = useLocation();
+    const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
+
+    if(token){
+        navigate(from, { replace: true });
+    }
+    console.log(token);
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -22,7 +32,8 @@ const Login = () => {
                 console.log(user);
                 form.reset();
                 setError('');
-                navigate(from, { replace: true });
+                setUserEmail(email);
+                console.log(token);
             })
             .catch(e => {
                 console.log(e);
@@ -35,7 +46,8 @@ const Login = () => {
                 const user = r.user;
                 console.log(user);
                 setError('');
-                saveUser(user.displayName, user.email, 'Buyer')
+                saveUser(user.displayName, user.email, 'Buyer');
+                // setUserEmail(user.email);
                 navigate(from, { replace: true });
             })
             .catch(e => {
@@ -62,8 +74,12 @@ const Login = () => {
     return (
         <div className='min-h-screen'>
             <h2 className='bg-secondary p-2 text-white text-center text-2xl font-semibold uppercase'>Log In</h2>
+            {
+                loading &&
+                <Spinner/>
+            }
 
-            <form data-aos="fade-left" data-aos-duration="1000" onSubmit={handleSubmit} className='container mx-auto bg-white px-5 px-10 py-10 rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
+            <form onSubmit={handleSubmit} className='container mx-auto bg-white px-5 lg:px-10 py-10 rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
                 <div className="mb-6">
                     <label htmlFor="email" className="block mb-2 text-lg font-medium">Your email</label>
                     <input type="email" name='email' id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Enter Your Email" required />

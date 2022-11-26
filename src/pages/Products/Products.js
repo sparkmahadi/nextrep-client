@@ -3,12 +3,11 @@ import BookingModal from './BookingModal';
 import ProductsDetails from './ProductsDetails';
 import { Toaster } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from "react-router-dom"
-import Spinner from '../../components/Spinner/Spinner';
+import { useParams, useNavigate } from "react-router-dom"
 
 const Products = () => {
     const [item, setItem] = useState(null);
-
+    const navigate = useNavigate();
     let params = useParams();
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['products'],
@@ -18,9 +17,8 @@ const Products = () => {
             return data;
         }
     })
-    console.log(products);
     if (isLoading) {
-        return <div className='custom-align'><Spinner></Spinner></div>
+        navigate('/loading')
     }
     return (
         <div className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 min-h-screen'>

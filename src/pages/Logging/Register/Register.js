@@ -2,9 +2,12 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
 import { toast } from 'react-hot-toast';
+import useSetToken from '../../../hooks/useSetToken';
 
 const Register = () => {
     const [error, setError] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [token] = useSetToken(userEmail);
     const { createNewUser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
@@ -18,8 +21,6 @@ const Register = () => {
         const password = form.password.value;
         const accountType = form.accountType.value;
 
-        console.log(accountType);
-
         createNewUser(email, password)
             .then(r => {
                 const user = r.user;
@@ -28,6 +29,7 @@ const Register = () => {
                 form.reset();
                 handleUpdateUserProfile(name, photoURL);
                 saveUser(name, email, accountType);
+                setUserEmail(email);
                 toast.success("Account Registered Successfully");
                 navigate(from, { replace: true });
             })
@@ -48,7 +50,7 @@ const Register = () => {
     }
 
     const saveUser = (name, email, accountType) =>{
-        let user ={name, email, accountType, verified: false};
+        const user ={name, email, accountType, verified: false};
         fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
