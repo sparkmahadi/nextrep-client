@@ -18,10 +18,10 @@ const Footer = () => {
                         </Link>
                         <div className="mt-6 lg:max-w-sm">
                             <p className="text-sm text-white">
-                                NextRep is a company which provides various informations about the courses and skills you can develop for yourself in different sections of Information Technology.
+                                NextRep is a company which provides the facility to resell or buy second hand motorcycles with a large community to reach peoples.
                             </p>
                             <p className="mt-4 text-sm text-white">
-                                Contact us for course outline of your favourite skills which are not mentioned in the site.
+                                Contact us anytime for support. We are open 24/7.
                             </p>
                         </div>
                     </div>

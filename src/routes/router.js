@@ -19,6 +19,7 @@ import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import Blog from '../pages/Blog/Blog';
 import Spinner from '../components/Spinner/Spinner';
 import ReportedItems from '../pages/Dashboard/ReportedItems/ReportedItems';
+import Payment from '../pages/Dashboard/Payment/Payment';
 
 export const router = createBrowserRouter([
     {
@@ -93,6 +94,11 @@ export const router = createBrowserRouter([
                 path: '/dashboard/reporteditems',
                 element: <CheckingRoute><ReportedItems></ReportedItems></CheckingRoute>
             },
+            {
+                path: '/dashboard/payment/:id',
+                element: <CheckingRoute><Payment></Payment></CheckingRoute>,
+                loader: ({params})=>fetch(`http://localhost:5000/bookings/${params.id}`)
+            }
         ]
     },
     {

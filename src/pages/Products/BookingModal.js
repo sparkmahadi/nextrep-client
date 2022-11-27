@@ -27,7 +27,8 @@ const BookingModal = ({ item, setItem, refetch }) => {
             sellerPhone: mobile,
             sellerLocation: location,
             price: resalePrice,
-            meetingLocation
+            meetingLocation,
+            payment: 'Unpaid'
         }       
 
         fetch(`http://localhost:5000/bookings?email=${user?.email}&productId=${_id}`, {

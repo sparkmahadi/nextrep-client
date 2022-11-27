@@ -4,10 +4,11 @@ import { AuthContext } from '../../../contexts/UserContext';
 import { FcGoogle } from 'react-icons/fc';
 import useSetToken from '../../../hooks/useSetToken';
 import Spinner from '../../../components/Spinner/Spinner';
+import { useEffect } from 'react';
 
 const Login = () => {
     const [error, setError] = useState('');
-    const { logIn, logInWithGoogle, loading } = useContext(AuthContext);
+    const { logIn, logInWithGoogle, loading, setLoading } = useContext(AuthContext);
     const [userEmail, setUserEmail] = useState('');
     console.log(userEmail);
     const [token] = useSetToken(userEmail);
@@ -15,9 +16,6 @@ const Login = () => {
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
 
-    if(token){
-        navigate(from, { replace: true });
-    }
     console.log(token);
 
     const handleSubmit = event => {
@@ -32,12 +30,15 @@ const Login = () => {
                 console.log(user);
                 form.reset();
                 setError('');
-                setUserEmail(email);
+                if(user){
+                    setUserEmail(user?.email);
+                }
                 console.log(token);
             })
             .catch(e => {
                 console.log(e);
                 setError(e.message);
+                setLoading(false);
             })
     }
     const handleGoogleLogin = () => {
@@ -47,8 +48,9 @@ const Login = () => {
                 console.log(user);
                 setError('');
                 saveUser(user.displayName, user.email, 'Buyer');
-                // setUserEmail(user.email);
-                navigate(from, { replace: true });
+                setUserEmail(user.email);
+                console.log(user.email);
+                // navigate(from, { replace: true });
             })
             .catch(e => {
                 console.log(e);
@@ -70,6 +72,12 @@ const Login = () => {
             console.log(data);
         })
     }
+
+    useEffect(()=>{
+        if(token){
+            navigate(from, { replace: true });
+        }
+    },[token])
 
     return (
         <div className='min-h-screen'>

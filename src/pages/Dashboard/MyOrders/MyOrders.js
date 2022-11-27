@@ -3,6 +3,7 @@ import React from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
 import { useContext } from 'react';
 import './MyOrders.css'
+import { Link } from 'react-router-dom';
 
 const MyOrders = () => {
     const {user} = useContext(AuthContext);
@@ -21,7 +22,7 @@ const MyOrders = () => {
             return data;
         }
     })
-    console.log(orders);
+    // console.log(orders);
     return (
         <div className='min-h-screen'>
             <div className="overflow-x-auto">
@@ -47,7 +48,8 @@ const MyOrders = () => {
                                 <td>{order.meetingLocation}</td>
                                 <td>{order.sellerName}</td>
                                 <td>
-                                    <button className='btn btn-secondary btn-sm'>Pay Now</button>
+                                    <Link to={`/dashboard/payment/${order._id}`}><button disabled={order.payment==='Paid'} className='btn btn-secondary btn-sm'>{
+                                    order.payment === 'Paid' ? 'Paid' : 'Pay'}</button></Link>
                                 </td>
                             </tr>)
                         }

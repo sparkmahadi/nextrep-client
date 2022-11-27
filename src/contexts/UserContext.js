@@ -56,7 +56,7 @@ const UserContext = ({ children }) => {
 
     const authInfo =
     {
-        user, loading,
+        user, loading, setLoading,
         createNewUser, logIn,
         logInWithGoogle, 
         updateUserProfile, logOut, resetPassword, removeUser
