@@ -1,32 +1,18 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, NavLink, useNavigate} from "react-router-dom";
 import { BiUserCircle } from 'react-icons/bi';
-import { BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs'
 import { AuthContext } from "../../../contexts/UserContext";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [theme, setTheme] = useState("light-theme");
     const { user, logOut } = useContext(AuthContext);
-
-
-
-    useEffect(() => {
-        document.body.className = theme;
-    }, [theme])
-
-    const toggleTheme = () => {
-        if (theme === "dark-theme") {
-            setTheme("light-theme")
-        }
-        else {
-            setTheme("dark-theme")
-        }
-    }
+    const navigate = useNavigate();
 
     const handleLogOut = () => {
         logOut()
-            .then(() => { })
+            .then(() => {
+                navigate('/');
+            })
             .catch(e => console.error(e))
     }
 
@@ -45,7 +31,7 @@ const Navbar = () => {
                             NextRep
                         </span>
                     </Link>
-                    <ul className="flex items-center hidden space-x-8 lg:flex">
+                    <ul className="items-center hidden space-x-8 lg:flex">
                         <li>
                             <NavLink
                                 to="/home"
@@ -79,26 +65,6 @@ const Navbar = () => {
                             >
                                 Blog
                             </NavLink>
-                        </li>
-                        <li onClick={toggleTheme}>
-                            <Link
-                                aria-label="Theme"
-                                title={theme}
-                                className="font-medium tracking-wide text-white hover:text-sky-300"
-                            >
-                                {
-                                    theme === "light-theme" ?
-                                        <div className="flex gap-2 items-center">
-                                            <p>Light | </p>
-                                            <BsFillSunFill className="w-6 h-6 sun-theme-bg" />
-                                        </div>
-                                        :
-                                        <div className="flex gap-2 items-center">
-                                            <p>Dark | </p>
-                                            <BsFillMoonStarsFill className="w-6 h-6 moon-theme-bg" />
-                                        </div>
-                                }
-                            </Link>
                         </li>
                         <li>
                             <div to='/login'
@@ -178,22 +144,7 @@ const Navbar = () => {
                             <div className="absolute top-0 left-0 w-full z-10">
                                 <div className="p-5 bg-white border rounded shadow-sm nav-mobile-menu">
                                     <div className="flex items-center justify-between mb-4">
-                                        <div>
-                                            <Link to='/'
-                                                aria-label="NextRep"
-                                                title="NextRep"
-                                                className="inline-flex items-center"
-                                            >
-                                                {
-                                                    theme === 'dark-theme' ? <img className="h-6 w-6" src="../../logo.png" alt="" />
-                                                        :
-                                                        <img className="h-6 w-6" src="https://i.ibb.co/ZSTFjYj/logo-white.png" alt="" />
-                                                }
-                                                <span className="ml-2 text-xl font-bold tracking-wide uppercase">
-                                                    NextRep
-                                                </span>
-                                            </Link>
-                                        </div>
+                                        
                                         <div>
                                             <button
                                                 aria-label="Close Menu"
@@ -228,7 +179,7 @@ const Navbar = () => {
                                                         to="/dashboard"
                                                         aria-label="dashboard"
                                                         title="dashboard"
-                                                        className={`font-medium tracking-wide text-white hover:text-sky-300`}
+                                                        className={`font-medium tracking-wide`}
                                                     >
                                                         Dashboard
                                                     </NavLink>
@@ -242,26 +193,6 @@ const Navbar = () => {
                                                 >
                                                     Blog
                                                 </NavLink>
-                                            </li>
-                                            <li onClick={toggleTheme}>
-                                                <Link
-                                                    aria-label="Theme"
-                                                    title={theme}
-                                                    className="font-medium tracking-wide text-white hover:text-sky-300 transition-colors duration-200 hover:text-teal-accent-400"
-                                                >
-                                                    {
-                                                        theme === "light-theme" ?
-                                                            <div className="flex gap-2 items-center">
-                                                                <p className="text-gray-900">Light | </p>
-                                                                <BsFillSunFill className="w-6 h-6 sun-theme-bg text-orange-500" />
-                                                            </div>
-                                                            :
-                                                            <div className="flex gap-2 items-center">
-                                                                <p className="text-white">Dark | </p>
-                                                                <BsFillMoonStarsFill className="w-6 h-6 moon-theme-bg" />
-                                                            </div>
-                                                    }
-                                                </Link>
                                             </li>
                                             <li>
                                                 <div to='/login'

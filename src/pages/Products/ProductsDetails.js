@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/UserContext';
 import { format } from 'date-fns';
 import toast, { Toaster } from 'react-hot-toast';
+import { HiCurrencyDollar } from "react-icons/hi";
 
 const ProductsDetails = ({ product, setItem }) => {
     const { user } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const ProductsDetails = ({ product, setItem }) => {
 
     const { condition, description, engineCapacity, img, location, mobile, name, originalPrice, postedTime, purchasedYear, resalePrice, totalRun, usedYear, sellerName, sellerVerified } = product;
 
-    const handleReportItem = (product, user) =>{
+    const handleReportItem = (product, user) => {
         const report = {
             productName: product.name,
             productId: product._id,
@@ -21,64 +22,67 @@ const ProductsDetails = ({ product, setItem }) => {
             reportedTime: format(new Date(), 'PP')
         }
         const agree = window.confirm(`Are you sure to report ${product.name}`)
-        if(agree){
-            fetch(`http://localhost:5000/reportedItems?email=${user.email}&productId=${product._id}`,{
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(report)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-            if(data.acknowledged){
-                toast.success(`${product.name} is reported successfully!`)
-            }
-            else {
-                toast.error(data.message);
-            }
-        })
+        if (agree) {
+            fetch(`https://next-rep-server.vercel.app/reportedItems?email=${user.email}&productId=${product._id}`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(report)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.acknowledged) {
+                        toast.success(`${product.name} is reported successfully!`)
+                    }
+                    else {
+                        toast.error(data.message);
+                    }
+                })
         }
     }
     return (
-        <div className="card card-compact w-full bg-base-100 shadow-xl text-gray-800">
+        <div className="card card-compact border w-full shadow-2xl text-gray-800">
             <Toaster></Toaster>
-            <figure><img className='w-full h-[500px]' src={img} alt="bike" /></figure>
+            <figure><img className='w-full h-80 lg:h-[500px] rounded-t-lg relative' src={img} alt="bike" /></figure>
+            <h2 className="text-center text-xl md:text-2xl font-bold bg-primary p-2 text-white">{name}</h2>
             <div className="card-body">
-                <h2 className="text-center md:text-2xl font-bold">{name}</h2>
-                <div className='sm:flex justify-around text-lg lg:text-sm'>
-                    <div className='sm:w-1/2'>
-                        <p><span className='font-bold'>Location:</span> {location}</p>
-                        <p><span className='font-bold'>Mobile No:</span> {mobile}</p>
-                        <p><span className='font-bold'>Posted Time:</span> {postedTime}</p>
-                        <p><span className='font-bold'>Purchased Year:</span> {purchasedYear}</p>
-                        <p className=''>
-                            <span className='font-bold items-center'>Seller: </span>
-                            <span className='sm:flex gap-2 items-center'>
-                                <span>{sellerName}</span>
-                                <span>{sellerVerified ? <MdVerified className="w-4 h-4 inline text-blue-500" /> : undefined}</span>
-                            </span>
-                        </p>
+                <div className={`${accType === 'Buyer' ? 'mb-10 md:mb-15' : undefined}`}>
+                    <div className='sm:flex justify-around text-lg lg:text-sm'>
+                        <div className='sm:w-1/2 text-center'>
+                            <p className='text-sm lg:text-base'><span className='font-bold'>Location:</span> {location}</p>
+                            <p className='text-sm lg:text-base'><span className='font-bold'>Mobile No:</span> {mobile}</p>
+                            <p className='text-sm lg:text-base'><span className='font-bold'>Posted Time:</span> {postedTime}</p>
+                            <p className='text-sm lg:text-base'><span className='font-bold'>Purchased Year:</span> {purchasedYear}</p>
+                            <p className='text-sm lg:text-base flex justify-center gap-1'>
+                                <span className='font-bold items-center'>Seller: </span>
+                                <span className='sm:flex gap-2 items-center'>
+                                    <span>{sellerName}</span>
+                                    <span>{sellerVerified ? <MdVerified className="w-4 h-4 inline text-blue-500" /> : undefined}</span>
+                                </span>
+                            </p>
+                        </div>
+                        <div className="divider divider-horizontal"></div>
+                        <div className='sm:w-1/2 text-center'>
+                            <p className='text-sm lg:text-base'><span className='font-bold'>Condition: </span>{condition}</p>
+                            <p className='text-sm lg:text-base'><span className='font-bold'>Engine Capacity:</span> {engineCapacity}cc</p>
+                            <p className='text-sm lg:text-base'><span className='font-bold'>Original Price:</span> {originalPrice} TK</p>
+                            <p className='text-sm lg:text-base'><span className='font-bold'>Total Run:</span> {totalRun} KM</p>
+                            <p className='text-sm lg:text-base'><span className='font-bold'>Used:</span> {usedYear} Year(s)</p>
+                        </div>
                     </div>
-                    <div className="divider divider-horizontal"></div>
-                    <div className='sm:w-1/2'>
-                        <p><span className='font-bold'>Condition: </span>{condition}</p>
-                        <p><span className='font-bold'>Engine Capacity:</span> {engineCapacity}cc</p>
-                        <p><span className='font-bold'>Original Price:</span> {originalPrice} TK</p>
-                        <p><span className='font-bold'>Total Run:</span> {totalRun} KM</p>
-                        <p><span className='font-bold'>Used:</span> {usedYear} Year(s)</p>
-                    </div>
+                    <p title={description} className='text-sm lg:text-base text-center py-2'><span className='font-bold' >Details:</span> {description.length > 100 ? description.slice(0,100)+'...' : description}</p>
                 </div>
-                <div className='text-lg lg:text-base pb-28'>
-                    <p className='text-center'><span className='font-bold'>Details:</span> {description}</p>
-                    <p className='text-center font-bold'>Reselling Price: {resalePrice}/= TK</p>
+                <div className={`text-lg lg:text-base md:w-1/3 rounded-lg bg-fifth text-white absolute p-2 top-5`}>
+                    <p className='text-center text-sm lg:text-xl font-bold'>TK. {resalePrice}/= </p>
                 </div>
                 {
                     accType === 'Buyer' &&
-                    <div className="">
-                        <label onClick={() => setItem(product)} className="btn btn-primary rounded-t-none absolute bottom-0 w-full right-0 left-0" htmlFor="product-booking-modal">Book Now</label>
-                        <button className='btn btn-error hover:bg-red-600 text-white rounded-none absolute bottom-16 w-full right-0 left-0' onClick={()=>handleReportItem(product, user)}>Report to Admin</button>
+                    <div className="flex absolute bottom-0 rounded-b-lg w-full right-0 left-0">
+                        <button className='btn btn-sm lg:btn-md hover:bg-red-800 text-white rounded-t-none rounded-br-none w-1/4' onClick={() => handleReportItem(product, user)}>Report to Admin</button>
+                        <label onClick={() => setItem(product)} className="btn btn-primary btn-sm lg:btn-md w-3/4  rounded-t-none rounded-bl-none" htmlFor="product-booking-modal">Book Now</label>
+                        {/* absolute bottom-10 lg:bottom-16 left-0 w-full */}
                     </div>
                 }
             </div>

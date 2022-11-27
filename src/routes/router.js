@@ -20,6 +20,7 @@ import Blog from '../pages/Blog/Blog';
 import Spinner from '../components/Spinner/Spinner';
 import ReportedItems from '../pages/Dashboard/ReportedItems/ReportedItems';
 import Payment from '../pages/Dashboard/Payment/Payment';
+import Categories from './../pages/Home/Categories/Categories';
 
 export const router = createBrowserRouter([
     {
@@ -28,13 +29,15 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>,
-                loader: ()=>fetch('http://localhost:5000/categories')
+                element: <Home></Home>
             },
             {
                 path: '/home',
-                element: <Home></Home>,
-                loader: ()=>fetch('http://localhost:5000/categories')
+                element: <Home></Home>
+            },
+            {
+                path: '/categories',
+                element: <Categories></Categories>
             },
             {
                 path: '/login',
@@ -97,16 +100,12 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <CheckingRoute><Payment></Payment></CheckingRoute>,
-                loader: ({params})=>fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader: ({params})=>fetch(`https://next-rep-server.vercel.app/bookings/${params.id}`)
             }
         ]
     },
     {
         path: '*',
         element: <ErrorPage></ErrorPage>
-    },
-    {
-        path: '/loading',
-        element: <Spinner></Spinner>
     }
 ])

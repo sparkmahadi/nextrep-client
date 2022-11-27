@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/UserContext';
 import useCheckAccType from '../hooks/useCheckAccType';
 import Footer from '../pages/Shared/Footer/Footer';
@@ -13,28 +13,29 @@ const DashboardLayout = () => {
     return (
         <div className=''>
             <Navbar></Navbar>
-            <div className='custom-grid lg:grid px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
-                <div>
-                    <ul className="menu bg-base-100 w-56">
+            <div className='custom-grid lg:grid gap-5 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
+                <div className='mx-auto'>
+                    <ul className="menu bg-base-100 sm:w-56 mx-auto">
+                    <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/profile'>My Profile</NavLink></li>
                         {
                             accType === 'Buyer' &&
-                            <li><Link to='/dashboard/myorders'>My Orders</Link></li>
+                            <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/myorders'>My Orders</NavLink></li>
                         }
 
                         {
                             accType === 'Seller' &&
                             <>
-                                <li><Link to='/dashboard/addproduct'>Add Products</Link></li>
-                                <li><Link to='/dashboard/myproducts'>My Products</Link></li>
+                                <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/addproduct'>Add Products</NavLink></li>
+                                <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/myproducts'>My Products</NavLink></li>
                             </>
                         }
 
                         {
                             accType === 'Admin' &&
                             <>
-                                <li><Link to='/dashboard/sellers'>All Sellers</Link></li>
-                                <li><Link to='/dashboard/buyers'>All Buyers</Link></li>
-                                <li><Link to='/dashboard/reporteditems'>Reported Items</Link></li>
+                                <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/sellers'>All Sellers</NavLink></li>
+                                <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/buyers'>All Buyers</NavLink></li>
+                                <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/reporteditems'>Reported Items</NavLink></li>
                             </>
                         }
                     </ul>

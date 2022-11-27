@@ -3,12 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
 import { toast, Toaster } from 'react-hot-toast';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    const url = `http://localhost:5000/myProducts?email=${user?.email}`;
+    const url = `https://next-rep-server.vercel.app/myProducts?email=${user?.email}`;
 
-    const { data: myProducts = [], refetch } = useQuery({
+    const { data: myProducts = [], isLoading, refetch } = useQuery({
         queryKey: ['myProducts', user?.email],
         queryFn: async () => {
             const res = await fetch(url,{
@@ -25,10 +26,12 @@ const MyProducts = () => {
         const agree = window.confirm(`Are you sure to advertise ${name}?`);
         const advertised = { advertised: true };
         if (agree) {
-            fetch(`http://localhost:5000/products/${id}`, {
+            fetch(`https://next-rep-server.vercel.app/products/${id}`, {
                 method: 'PUT',
                 headers:
-                    { 'content-type': 'application/json' },
+                    { 'content-type': 'application/json',
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                },
                 body: JSON.stringify(advertised)
             })
                 .then(res => res.json())
@@ -42,10 +45,14 @@ const MyProducts = () => {
         }
     }
 
+    if(isLoading){
+        return <Spinner></Spinner>
+    }
+
     const handleDeleteProduct = (id, name) => {
         const agree = window.confirm(`Are you sure to delete ${name}?`);
         if (agree) {
-            fetch(`http://localhost:5000/products/${id}`, {
+            fetch(`https://next-rep-server.vercel.app/products/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

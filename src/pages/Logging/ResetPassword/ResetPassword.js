@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/UserContext';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ResetPassword = () => {
     const [error, setError] = useState('');
@@ -12,10 +12,10 @@ const ResetPassword = () => {
     const onSubmit = (d) => {
         setError('');
         const email = d.resetEmail;
-        console.log(email);
+        // console.log(email);
         resetPassword(email)
             .then(() => {
-                console.log('password reset email sent');
+                toast.success('Password reset email sent to your email.')
             })
             .catch(e => {
                 console.error(e);
@@ -25,6 +25,7 @@ const ResetPassword = () => {
     }
     return (
         <div>
+            <Toaster></Toaster>
             <form onSubmit={handleSubmit(onSubmit)} className='container mx-auto bg-white px-5 px-10 py-10 rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
                 <div className="mb-6">
                     <label htmlFor="email" className="block mb-2 text-lg font-medium">Your email</label>
@@ -38,7 +39,7 @@ const ResetPassword = () => {
 
                 <p className='text-red-600 mb-2'>{error}</p>
 
-                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5">Reset Password</button>
+                <button type="submit" className="text-white btn-secondary hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5">Reset Password</button>
 
             </form>
         </div>

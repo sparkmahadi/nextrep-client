@@ -1,27 +1,35 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import './MyOrders.css'
 import { Link } from 'react-router-dom';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const MyOrders = () => {
+    const [loading, setLoading] = useState(false);
     const {user} = useContext(AuthContext);
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `https://next-rep-server.vercel.app/bookings?email=${user?.email}`;
 
     const { data: orders = [] } = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
+            setLoading(true);
             const res = await fetch(url,{
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
             });
             const data = await res.json();
+            setLoading(false);
             return data;
         }
     })
+    
+    if(loading){
+        return <Spinner></Spinner>
+    }
     // console.log(orders);
     return (
         <div className='min-h-screen'>

@@ -6,12 +6,10 @@ import PowerfulBike from '../PowerfulBike/PowerfulBike';
 
 const Home = () => {
     return (
-        <div>
+        <div className='my-home font-primary'>
             <Banner></Banner>
-            <h2 className='text-3xl font-bold text-center mt-6 uppercase'>Brands</h2>
             <Categories></Categories>
             <AdertisedItems></AdertisedItems>
-            <h2 className='text-3xl font-bold text-center mt-6 uppercase'>World's Most Powerful Bike</h2>
             <PowerfulBike></PowerfulBike>
         </div>
     );

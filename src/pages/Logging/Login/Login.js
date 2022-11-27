@@ -5,25 +5,23 @@ import { FcGoogle } from 'react-icons/fc';
 import useSetToken from '../../../hooks/useSetToken';
 import Spinner from '../../../components/Spinner/Spinner';
 import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 const Login = () => {
     const [error, setError] = useState('');
     const { logIn, logInWithGoogle, loading, setLoading } = useContext(AuthContext);
     const [userEmail, setUserEmail] = useState('');
-    console.log(userEmail);
     const [token] = useSetToken(userEmail);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
-
-    console.log(token);
 
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-
+        
         logIn(email, password)
             .then(r => {
                 const user = r.user;
@@ -33,7 +31,6 @@ const Login = () => {
                 if(user){
                     setUserEmail(user?.email);
                 }
-                console.log(token);
             })
             .catch(e => {
                 console.log(e);
@@ -47,20 +44,21 @@ const Login = () => {
                 const user = r.user;
                 console.log(user);
                 setError('');
-                saveUser(user.displayName, user.email, 'Buyer');
-                setUserEmail(user.email);
-                console.log(user.email);
-                // navigate(from, { replace: true });
+                if(user){
+                    saveUser(user.displayName, user.email, 'Buyer');
+                    setUserEmail(user.email);
+                }
             })
             .catch(e => {
                 console.log(e);
                 setError(e.message);
+                setLoading(false);
             })
     }
 
     const saveUser = (name, email, accountType) =>{
         let user ={name, email, accountType, verified: false};
-        fetch('http://localhost:5000/users', {
+        fetch('https://next-rep-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -77,11 +75,12 @@ const Login = () => {
         if(token){
             navigate(from, { replace: true });
         }
-    },[token])
+    },[token, userEmail])
 
     return (
         <div className='min-h-screen'>
-            <h2 className='bg-secondary p-2 text-white text-center text-2xl font-semibold uppercase'>Log In</h2>
+            <Toaster/>
+            <h2 className='bg-secondary p-2 text-white text-center text-xl lg:text-2xl font-semibold uppercase'>Log In</h2>
             {
                 loading &&
                 <Spinner/>

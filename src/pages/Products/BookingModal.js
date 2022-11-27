@@ -31,10 +31,11 @@ const BookingModal = ({ item, setItem, refetch }) => {
             payment: 'Unpaid'
         }       
 
-        fetch(`http://localhost:5000/bookings?email=${user?.email}&productId=${_id}`, {
+        fetch(`https://next-rep-server.vercel.app/bookings?email=${user?.email}&productId=${_id}`, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(booking)
         })
@@ -74,7 +75,7 @@ const BookingModal = ({ item, setItem, refetch }) => {
                     </form>
 
                 <div className="modal-action">
-                    <label htmlFor="product-booking-modal" className="btn btn-accent w-full">Cancel</label>
+                    <label onClick={() => setItem(null)} htmlFor="product-booking-modal" className="btn btn-accent w-full">Cancel</label>
                 </div>
                 </div>
             </div>

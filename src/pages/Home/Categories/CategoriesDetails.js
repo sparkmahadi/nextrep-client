@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const CategoriesDetails = ({ category }) => {
     const {img, brandName, brandId} = category;
     return (
-        <Link to={`/category/${brandId}`}>
+        <Link className='mx-auto' to={`/category/${brandId}`}>
             <div className="card card-compact w-44 bg-base-100 shadow-xl">
                 <figure><img className='' src={img} alt="brands" /></figure>
                 <div className="card-body">

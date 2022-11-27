@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const ReportedItems = () => {
 
-    const { data: reportedItems = [], refetch } = useQuery({
+    const { data: reportedItems = [], refetch, isLoading } = useQuery({
         queryKey: ['reportedItems'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/reportedItems', {
+            const res = await fetch('https://next-rep-server.vercel.app/reportedItems', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -21,8 +22,11 @@ const ReportedItems = () => {
         const agree = window.confirm(`Are you sure to delete ${name}?`);
         if (agree) {
             handleDeleteReport(id, name);
-            fetch(`http://localhost:5000/products/${id}`, {
-                method: 'DELETE'
+            fetch(`https://next-rep-server.vercel.app/products/${id}`, {
+                method: 'DELETE',
+                headers:{
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -34,8 +38,11 @@ const ReportedItems = () => {
     }
 
     const handleDeleteReport = (id, name) => {
-        fetch(`http://localhost:5000/reportedItems/${id}`, {
-            method: 'DELETE'
+        fetch(`https://next-rep-server.vercel.app/reportedItems/${id}`, {
+            method: 'DELETE',
+            headers:{
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -43,6 +50,10 @@ const ReportedItems = () => {
                 toast.success(`${name} is deleted from reportedItems`);
                 refetch();
             })
+    }
+
+    if(isLoading){
+        return <Spinner></Spinner>
     }
     return (
         <div>

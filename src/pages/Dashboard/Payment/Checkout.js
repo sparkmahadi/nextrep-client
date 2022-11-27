@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
 import Spinner from '../../../components/Spinner/Spinner';
 import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Checkout = ({ bookedInfo }) => {
@@ -14,12 +14,11 @@ const Checkout = ({ bookedInfo }) => {
     const [clientSecret, setClientSecret] = useState("");
     const stripe = useStripe();
     const elements = useElements();
-    const navigate = useNavigate();
     const { price, buyerName, buyerEmail, _id, productId } = bookedInfo;
 
     useEffect(() => {
-        // can add a spinner here
-        fetch("http://localhost:5000/create-payment-intent", {
+        setProcessing(true);
+        fetch("https://next-rep-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -28,7 +27,10 @@ const Checkout = ({ bookedInfo }) => {
             body: JSON.stringify({ price }),
         })
             .then((res) => res.json())
-            .then((data) => setClientSecret(data.clientSecret));
+            .then((data) => {
+                setClientSecret(data.clientSecret);
+                setProcessing(false);
+            });
     }, [price]);
 
     const handleSubmit = async (event) => {
@@ -74,11 +76,11 @@ const Checkout = ({ bookedInfo }) => {
                         payment: 'Paid',
                         paymentTime: format(new Date(), 'PP')
                     };
-                    console.log(paymentInfo);
-                    fetch(`http://localhost:5000/bookings/${_id}`, {
+                    fetch(`https://next-rep-server.vercel.app/bookings/${_id}`, {
                         method: 'PUT',
                         headers: {
-                            'content-type': 'application/json'
+                            'content-type': 'application/json',
+                            authorization: `bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify(paymentInfo)
                     })
@@ -87,17 +89,18 @@ const Checkout = ({ bookedInfo }) => {
                             console.log(data)
                             if (data.modifiedCount > 0) {
                                 console.log('updated as paid in orders');
-                                // have to update the product as sold in productsCollection
-                                fetch(`http://localhost:5000/products/${productId}`)
+                                // to update the product as sold in productsCollection. First get with id(string), then update with id(objectId)
+                                fetch(`https://next-rep-server.vercel.app/products/${productId}`)
                                     .then(res => res.json())
                                     .then(data => {
                                         console.log(data)
                                         const sold = {status: 'Sold'};
                                         if(Object.keys(data).length){
-                                            fetch(`http://localhost:5000/products/${data._id}`,{
+                                            fetch(`https://next-rep-server.vercel.app/products/${data._id}`,{
                                                 method: 'PUT',
                                                 headers: {
-                                                    'content-type' : 'application/json'
+                                                    'content-type' : 'application/json',
+                                                    authorization: `bearer ${localStorage.getItem('accessToken')}`
                                                 },
                                                 body: JSON.stringify(sold)
                                             })
@@ -106,7 +109,6 @@ const Checkout = ({ bookedInfo }) => {
                                                 console.log(data);
                                                 if(data.modifiedCount > 0){
                                                     console.log('product status updated as sold');
-                                                    navigate('/dashboard/myorders');
                                                 }
                                             })
                                         }
@@ -143,7 +145,10 @@ const Checkout = ({ bookedInfo }) => {
             <p className="text-error">{error}</p>
             {
                 transactionId &&
-                <p className='text-secondary py-2'>Last Transaction Id : <span className='font-semibold'>{transactionId}</span></p>
+                <>
+                <p className='text-secondary py-2 break-words'>Last Transaction Id : <span className='font-semibold'>{transactionId}</span></p>
+                <p className='text-primary'>Go Back to <Link to='/' className='font-semibold underline'>Homepage</Link></p>
+                </>
             }
             {
                 processing && <Spinner></Spinner>
