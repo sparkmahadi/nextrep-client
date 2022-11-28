@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/UserContext';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const ResetPassword = () => {
     const [error, setError] = useState('');
@@ -25,7 +26,9 @@ const ResetPassword = () => {
     }
     return (
         <div>
-            <Toaster></Toaster>
+            <Helmet>
+                <title>NextRep | Reset Password</title>
+            </Helmet>
             <form onSubmit={handleSubmit(onSubmit)} className='container mx-auto bg-white px-5 px-10 py-10 rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
                 <div className="mb-6">
                     <label htmlFor="email" className="block mb-2 text-lg font-medium">Your email</label>

@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import useSetToken from '../../../hooks/useSetToken';
 import { useEffect } from 'react';
 import Spinner from '../../../components/Spinner/Spinner';
+import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
     const [loading, setLoading] = useState(false);
@@ -105,6 +106,9 @@ const Register = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>NextRep | Register</title>
+            </Helmet>
             {
                 loading && <Spinner></Spinner>
             }

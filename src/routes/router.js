@@ -25,6 +25,7 @@ export const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
@@ -63,6 +64,7 @@ export const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/dashboard',
@@ -102,9 +104,5 @@ export const router = createBrowserRouter([
                 loader: ({params})=>fetch(`https://next-rep-server.vercel.app/bookings/${params.id}`)
             }
         ]
-    },
-    {
-        path: '*',
-        element: <ErrorPage></ErrorPage>
     }
 ])

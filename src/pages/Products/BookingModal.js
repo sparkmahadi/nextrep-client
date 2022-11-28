@@ -78,7 +78,7 @@ const BookingModal = ({ item, setItem, refetch }) => {
                         }
                         {
                             !user && 
-                            <p>Please <Link className='text-primary font-bold'>Log In</Link> First to Book</p>
+                            <p>Please <Link to='/login' className='text-primary font-bold'>Log In</Link> First to Book</p>
                         }
                     </form>
 

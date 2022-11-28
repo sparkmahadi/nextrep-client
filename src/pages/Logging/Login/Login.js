@@ -6,6 +6,7 @@ import useSetToken from '../../../hooks/useSetToken';
 import Spinner from '../../../components/Spinner/Spinner';
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const [error, setError] = useState('');
@@ -21,14 +22,14 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        
+
         logIn(email, password)
             .then(r => {
                 const user = r.user;
                 console.log(user);
                 form.reset();
                 setError('');
-                if(user){
+                if (user) {
                     setUserEmail(user?.email);
                 }
             })
@@ -44,7 +45,7 @@ const Login = () => {
                 const user = r.user;
                 console.log(user);
                 setError('');
-                if(user){
+                if (user) {
                     saveUser(user.displayName, user.email, 'Buyer');
                     // setUserEmail(user.email);
                 }
@@ -56,8 +57,8 @@ const Login = () => {
             })
     }
 
-    const saveUser = (name, email, accountType) =>{
-        const user ={name, email, accountType};
+    const saveUser = (name, email, accountType) => {
+        const user = { name, email, accountType };
         fetch('https://next-rep-server.vercel.app/users', {
             method: 'POST',
             headers: {
@@ -65,26 +66,29 @@ const Login = () => {
             },
             body: JSON.stringify(user)
         })
-        .then(res => res.json())
-        .then(data =>{
-            console.log(data);
-            setUserEmail(user.email);
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setUserEmail(user.email);
+            })
     }
 
-    useEffect(()=>{
-        if(token){
+    useEffect(() => {
+        if (token) {
             navigate(from, { replace: true });
         }
-    },[token, userEmail])
+    }, [token, userEmail])
 
     return (
         <div className='min-h-screen'>
-            <Toaster/>
+            <Helmet>
+                <title>NextRep | Login</title>
+            </Helmet>
+            <Toaster />
             <h2 className='bg-secondary p-2 text-white text-center text-xl lg:text-2xl font-semibold uppercase'>Log In</h2>
             {
                 loading &&
-                <Spinner/>
+                <Spinner />
             }
 
             <form onSubmit={handleSubmit} className='container mx-auto bg-white px-5 lg:px-10 py-10 rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>

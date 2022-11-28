@@ -46,7 +46,7 @@ const ProductsDetails = ({ product, setItem, accType, user }) => {
     return (
         <div className="card card-compact border w-full shadow-2xl text-gray-800">
             <Toaster></Toaster>
-            <figure><img className='w-full h-80 lg:h-[500px] rounded-t-lg relative' src={img} alt="bike" /></figure>
+            <figure><img className='w-full h-76 lg:h-[400px] xl:h-[480px] rounded-t-lg relative' src={img} alt="bike" /></figure>
             <h2 className="text-center text-xl md:text-2xl font-bold bg-primary p-2 text-white uppercase">{name}</h2>
             <div className="card-body">
                 <div className={`${accType === 'Buyer' || !accType ? 'mb-10 md:mb-15' : undefined}`}>
