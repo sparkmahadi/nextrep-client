@@ -40,11 +40,6 @@ const UserContext = ({ children }) => {
         return sendPasswordResetEmail(auth, email)
     }
 
-    const removeUser = () =>{
-        const user = auth.currentUser;
-        return deleteUser(user)
-    }
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             console.log('user state updated', currentUser);
@@ -59,7 +54,7 @@ const UserContext = ({ children }) => {
         user, loading, setLoading,
         createNewUser, logIn,
         logInWithGoogle, 
-        updateUserProfile, logOut, resetPassword, removeUser
+        updateUserProfile, logOut, resetPassword
     }
     return (
         <AuthContext.Provider value={authInfo}>

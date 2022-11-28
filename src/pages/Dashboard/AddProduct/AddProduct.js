@@ -53,12 +53,12 @@ const AddProduct = () => {
                     const brands = ['Hero', 'Honda', 'Lifan', 'Suzuki', 'TVS', 'Yamaha', 'Bajaj'];
                     product.brandId = brands.indexOf(brandName) + 1;
 
-                    fetch(`http://localhost:5000/users/sellerVerification/${user.email}`)
+                    fetch(`https://next-rep-server.vercel.app/users/sellerVerification/${user.email}`)
                         .then(res => res.json())
                         .then(data => {
                             console.log(data);
                             product.sellerVerified = data;
-                            fetch('http://localhost:5000/products', {
+                            fetch('https://next-rep-server.vercel.app/products', {
                                 method: 'POST',
                                 headers: {
                                     'content-type': 'application/json',

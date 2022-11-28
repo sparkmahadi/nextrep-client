@@ -8,7 +8,7 @@ const useSetToken = (email) => {
     const {logOut} = useContext(AuthContext);
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/jwt?email=${email}`)
+            fetch(`https://next-rep-server.vercel.app/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.accessToken) {

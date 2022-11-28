@@ -1,15 +1,14 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { MdVerified } from 'react-icons/md';
 import Spinner from '../../../components/Spinner/Spinner';
-import { useState } from 'react';
 
 const AllBuyers = () => {
     const { data: users = [], isLoading, isFetching, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/buyers', {
+            const res = await fetch('https://next-rep-server.vercel.app/buyers', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -23,7 +22,7 @@ const AllBuyers = () => {
         const agree = window.confirm(`Are you sure to verifiy '${name}' with email: '${email}'?`);
         const verified = { verified: true }
         if (agree) {
-            fetch(`http://localhost:5000/users/${email}`, {
+            fetch(`https://next-rep-server.vercel.app/users/${email}`, {
                 method: 'PUT',
                 headers:
                 {
@@ -46,7 +45,7 @@ const AllBuyers = () => {
     const handleDeleteUser = user => {
         const agree = window.confirm(`Are you sure to delete ${user?.email}?`);
         if (agree) {
-            fetch(`http://localhost:5000/users/${user._id}`, {
+            fetch(`https://next-rep-server.vercel.app/users/${user._id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`

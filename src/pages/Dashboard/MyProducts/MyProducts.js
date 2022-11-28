@@ -7,7 +7,7 @@ import Spinner from '../../../components/Spinner/Spinner';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    const url = `http://localhost:5000/myProducts?email=${user?.email}`;
+    const url = `https://next-rep-server.vercel.app/myProducts?email=${user?.email}`;
 
     const { data: myProducts = [], isLoading, isFetching, refetch } = useQuery({
         queryKey: ['myProducts', user?.email],
@@ -26,7 +26,7 @@ const MyProducts = () => {
         const agree = window.confirm(`Are you sure to advertise ${name}?`);
         const advertised = { advertised: true };
         if (agree) {
-            fetch(`http://localhost:5000/products/${id}`, {
+            fetch(`https://next-rep-server.vercel.app/products/${id}`, {
                 method: 'PUT',
                 headers:
                     { 'content-type': 'application/json',
@@ -48,7 +48,7 @@ const MyProducts = () => {
     const handleDeleteProduct = (id, name) => {
         const agree = window.confirm(`Are you sure to delete ${name}?`);
         if (agree) {
-            fetch(`http://localhost:5000/products/${id}`, {
+            fetch(`https://next-rep-server.vercel.app/products/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`

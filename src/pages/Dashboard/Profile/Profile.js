@@ -2,13 +2,15 @@ import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
 import toast, { Toaster } from 'react-hot-toast';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const Profile = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [photoURL, setPhotoURL] = useState("");
+    const [userFromDB, setUserFromDB] = useState({});
 
-    const { user, loading, updateUserProfile } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
 
     useEffect(() => {
         if (!loading) {
@@ -16,15 +18,13 @@ const Profile = () => {
                 const displayName = user.displayName;
                 const email = user.email;
                 const photoURL = user.photoURL;
-                if (displayName) {
                     setName(displayName);
-                }
-                if (email) {
                     setEmail(email);
-                }
-                if (photoURL) {
                     setPhotoURL(photoURL);
-                }
+
+                    fetch(`https://next-rep-server.vercel.app/users/${email}`)
+                    .then(res=>res.json())
+                    .then(data=>setUserFromDB(data))
             }
             else {
                 toast.error("You're not logged in")
@@ -32,48 +32,42 @@ const Profile = () => {
         }
     }, [loading, user])
 
-    const handleUpdateUserProfile = (event) => {
-
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const email = form.email.value;
-        const photoURL = form.photoURL.value;
-
-        const profile = {
-            displayName: name,
-            photoURL: photoURL,
-            email: email
-        }
-        updateUserProfile(profile)
-            .then(() => {
-                toast.success("Profile Updated Successfully!")
-            })
-            .catch(e => console.error(e));
-    }
+    console.log(userFromDB);
 
     return (
-        <div className='min-h-custom'>
+        <div className='min-h-custom font-secondary'>
             <Toaster />
-            <h2 className='p-2 text-gray-900 text-center text-2xl font-semibold'>Your Profile</h2>
-            <form onSubmit={handleUpdateUserProfile} className='container mx-auto bg-white px-10 my-5 py-10 rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
+            {
+                loading && <Spinner></Spinner>
+            }
+            <h2 className='p-2 text-gray-900 text-center text-2xl font-semibold'>My Profile</h2>
+            <div className='mx-auto bg-gray-200 px-10 my-5 py-10 rounded-lg text-gray-900 md:w-2/3'>
 
-                <div className="mb-6">
-                    <label htmlFor="name" className="block mb-2 text-lg font-medium">Your Full Name:</label>
-                    <input type="text" name='name' id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={name} required />
+                <div className="max-w-3xl mb-5">
+                    <img className='w-40 mx-auto rounded-lg' src={photoURL} alt="" />
                 </div>
 
-                <div className="mb-6">
-                    <label htmlFor="email" className="block mb-2 text-lg font-medium">Your email</label>
-                    <input type="email" name='email' id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={email} required />
+                <div className="max-w-md mx-auto bg-gray-300 px-2 rounded-md  flex justify-between items-center mb-5">
+                    <h5 className="lg:text-lg font-medium w-1/3">Full Name:</h5>
+                    <p type="text" className="lg:text-lg rounded-lg p-2 w-2/3">{name}</p>
                 </div>
 
-                <div className="mb-6">
-                    <label htmlFor="photoURL" className="block mb-2 text-lg font-medium">Your Photo URL</label>
-                    <input type="text" name='photoURL' id="photoURL" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" defaultValue={photoURL} />
+                <div className="max-w-md mx-auto  bg-gray-300 px-2 rounded-md flex justify-between items-center mb-5">
+                    <h5 className="lg:text-lg font-medium w-1/3">Email:</h5>
+                    <p type="email" className="lg:text-lg rounded-lg p-2 w-2/3">{email}</p>
                 </div>
-                <button type="submit" className="text-white btn-primary hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5">Update</button>
-            </form>
+
+                <div className="max-w-md mx-auto  bg-gray-300 px-2 rounded-md flex justify-between items-center mb-5">
+                    <h5 className="lg:text-lg font-medium w-1/3">Role:</h5>
+                    <p type="email" className="lg:text-lg rounded-lg p-2 w-2/3">{userFromDB.accountType}</p>
+                </div>
+
+                <div className="max-w-md mx-auto  bg-gray-300 px-2 rounded-md flex justify-between items-center mb-5">
+                    <h5 className="lg:text-lg font-medium w-1/3">Verification:</h5>
+                    <p type="email" className="lg:text-lg rounded-lg p-2 w-2/3">{userFromDB.verified ? 'Verified' : 'Not Yet'}</p>
+                </div>
+            </div>
+            
         </div>
     );
 };

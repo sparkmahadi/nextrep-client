@@ -10,7 +10,7 @@ const AdertisedItems = () => {
     const {data: advertisedProducts = [], refetch, isLoading} = useQuery({
         queryKey: ['advertisedProducts'],
         queryFn: async () =>{
-            const res = await fetch(`http://localhost:5000/advertisedProducts`);
+            const res = await fetch(`https://next-rep-server.vercel.app/advertisedProducts`);
             const data = await res.json();
             return data;
         }

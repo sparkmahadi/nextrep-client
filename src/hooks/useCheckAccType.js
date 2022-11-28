@@ -5,7 +5,7 @@ const useCheckAccType = (email) => {
     const [isAccLoding, setIsAccLoading] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/users/accTypeCheck/${email}`)
+            fetch(`https://next-rep-server.vercel.app/users/accTypeCheck/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     // console.log(data);
