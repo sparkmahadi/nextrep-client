@@ -5,7 +5,6 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/UserContext';
 import { format } from 'date-fns';
 import toast, { Toaster } from 'react-hot-toast';
-import { HiCurrencyDollar } from "react-icons/hi";
 
 const ProductsDetails = ({ product, setItem }) => {
     const { user } = useContext(AuthContext);

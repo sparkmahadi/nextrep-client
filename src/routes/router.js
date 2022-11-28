@@ -17,7 +17,6 @@ import CheckingRoute from './CheckingRoute';
 import Profile from '../pages/Dashboard/Profile/Profile';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import Blog from '../pages/Blog/Blog';
-import Spinner from '../components/Spinner/Spinner';
 import ReportedItems from '../pages/Dashboard/ReportedItems/ReportedItems';
 import Payment from '../pages/Dashboard/Payment/Payment';
 import Categories from './../pages/Home/Categories/Categories';

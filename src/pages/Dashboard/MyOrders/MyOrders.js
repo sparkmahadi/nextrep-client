@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import './MyOrders.css'
 import { Link } from 'react-router-dom';
 import Spinner from '../../../components/Spinner/Spinner';
