@@ -100,7 +100,7 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <CheckingRoute><Payment></Payment></CheckingRoute>,
-                loader: ({params})=>fetch(`https://next-rep-server.vercel.app/bookings/${params.id}`)
+                loader: ({params})=>fetch(`http://localhost:5000/bookings/${params.id}`)
             }
         ]
     },

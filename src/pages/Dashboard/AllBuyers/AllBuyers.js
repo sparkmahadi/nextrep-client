@@ -3,12 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import toast, { Toaster } from 'react-hot-toast';
 import { MdVerified } from 'react-icons/md';
 import Spinner from '../../../components/Spinner/Spinner';
+import { useState } from 'react';
 
 const AllBuyers = () => {
-    const { data: users = [], isLoading, refetch } = useQuery({
+    const { data: users = [], isLoading, isFetching, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('https://next-rep-server.vercel.app/buyers', {
+            const res = await fetch('http://localhost:5000/buyers', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -22,7 +23,7 @@ const AllBuyers = () => {
         const agree = window.confirm(`Are you sure to verifiy '${name}' with email: '${email}'?`);
         const verified = { verified: true }
         if (agree) {
-            fetch(`https://next-rep-server.vercel.app/users/${email}`, {
+            fetch(`http://localhost:5000/users/${email}`, {
                 method: 'PUT',
                 headers:
                 {
@@ -34,9 +35,9 @@ const AllBuyers = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
+                    toast.success(`${name} is verified successfully`);
                     if (data.modifiedCount > 0) {
                         refetch();
-                        toast.success(`${name} is verified successfully`);
                     }
                 })
         }
@@ -45,25 +46,31 @@ const AllBuyers = () => {
     const handleDeleteUser = user => {
         const agree = window.confirm(`Are you sure to delete ${user?.email}?`);
         if (agree) {
-            fetch(`https://next-rep-server.vercel.app/users/${user._id}`, {
-                method: 'DELETE'
+            fetch(`http://localhost:5000/users/${user._id}`, {
+                method: 'DELETE',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
                     toast.success(`${user?.email} is deleted successfully`);
-                    refetch();
+                    if(data.deletedCount > 0){
+                        refetch();
+                    }
                 })
         }
     }
-    
-    if(isLoading){
-        return <Spinner></Spinner>
-    }
-
     return (
         <div className='min-h-screen'>
-            <Toaster></Toaster>
+            {
+                isLoading && <Spinner></Spinner>
+            }
+            {
+                
+                isFetching && <Spinner></Spinner>
+            }
             <div className="overflow-x-auto">
                 <table className="lg:table lg:w-full">
 

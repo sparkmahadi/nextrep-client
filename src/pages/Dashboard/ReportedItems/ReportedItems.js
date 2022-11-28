@@ -1,14 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import Spinner from '../../../components/Spinner/Spinner';
 
 const ReportedItems = () => {
-
-    const { data: reportedItems = [], refetch, isLoading } = useQuery({
+    const { data: reportedItems = [], refetch, isLoading, isFetching } = useQuery({
         queryKey: ['reportedItems'],
         queryFn: async () => {
-            const res = await fetch('https://next-rep-server.vercel.app/reportedItems', {
+            const res = await fetch('http://localhost:5000/reportedItems', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -22,42 +21,47 @@ const ReportedItems = () => {
         const agree = window.confirm(`Are you sure to delete ${name}?`);
         if (agree) {
             handleDeleteReport(id, name);
-            fetch(`https://next-rep-server.vercel.app/products/${id}`, {
+            fetch(`http://localhost:5000/products/${id}`, {
                 method: 'DELETE',
-                headers:{
+                headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
-                    toast.success(`${name} is deleted from products`);
-                    refetch();
+                    if (data.deletedCount > 0) {
+                        console.log(data);
+                        toast.success(`${name} is deleted from products`);
+                    }
                 })
         }
     }
 
     const handleDeleteReport = (id, name) => {
-        fetch(`https://next-rep-server.vercel.app/reportedItems/${id}`, {
+        fetch(`http://localhost:5000/reportedItems/${id}`, {
             method: 'DELETE',
-            headers:{
+            headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                toast.success(`${name} is deleted from reportedItems`);
-                refetch();
+                if (data.deletedCount > 0) {
+                    console.log(data);
+                    console.log(`${name} is deleted from Reported Items`);
+                    refetch();
+                }
             })
-    }
-
-    if(isLoading){
-        return <Spinner></Spinner>
     }
     return (
         <div>
-            <Toaster></Toaster>
+            {
+                isLoading && <Spinner></Spinner>
+            }
+            {
+                
+                isFetching && <Spinner></Spinner>
+            }
             <div className="overflow-x-auto">
                 <table className="lg:table lg:w-full">
 
@@ -81,7 +85,7 @@ const ReportedItems = () => {
                                     <button
                                         onClick={() => handleDeleteProduct(pd.productId, pd.productName)}
                                         className='bg-red-600 p-1 lg:p-2 rounded-lg text-white'
-                                    >Delete</button>
+                                    >Accept & Delete</button>
                                 </td>
                                 <td>
                                     <button

@@ -13,7 +13,7 @@ const Products = () => {
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`https://next-rep-server.vercel.app/category/${params.id}`);
+            const res = await fetch(`http://localhost:5000/category/${params.id}`);
             const data = await res.json();
             return data;
         }
@@ -38,7 +38,7 @@ const Products = () => {
             </div>
             {
                 products.length === 0 &&
-                <h2 className='text-center text-3xl custom-align'>No Products Are Available!!!</h2>
+                <h2 className='text-center text-lg lg:text-3xl custom-align'>No Products Are Available!!!</h2>
             }
             {
                 item &&

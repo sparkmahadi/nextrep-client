@@ -23,7 +23,7 @@ const ProductsDetails = ({ product, setItem }) => {
         }
         const agree = window.confirm(`Are you sure to report ${product.name}`)
         if (agree) {
-            fetch(`https://next-rep-server.vercel.app/reportedItems?email=${user.email}&productId=${product._id}`, {
+            fetch(`http://localhost:5000/reportedItems?email=${user.email}&productId=${product._id}`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -46,7 +46,7 @@ const ProductsDetails = ({ product, setItem }) => {
         <div className="card card-compact border w-full shadow-2xl text-gray-800">
             <Toaster></Toaster>
             <figure><img className='w-full h-80 lg:h-[500px] rounded-t-lg relative' src={img} alt="bike" /></figure>
-            <h2 className="text-center text-xl md:text-2xl font-bold bg-primary p-2 text-white">{name}</h2>
+            <h2 className="text-center text-xl md:text-2xl font-bold bg-primary p-2 text-white uppercase">{name}</h2>
             <div className="card-body">
                 <div className={`${accType === 'Buyer' ? 'mb-10 md:mb-15' : undefined}`}>
                     <div className='sm:flex justify-around text-lg lg:text-sm'>
@@ -80,9 +80,8 @@ const ProductsDetails = ({ product, setItem }) => {
                 {
                     accType === 'Buyer' &&
                     <div className="flex absolute bottom-0 rounded-b-lg w-full right-0 left-0">
-                        <button className='btn btn-sm lg:btn-md hover:bg-red-800 text-white rounded-t-none rounded-br-none w-1/4' onClick={() => handleReportItem(product, user)}>Report to Admin</button>
-                        <label onClick={() => setItem(product)} className="btn btn-primary btn-sm lg:btn-md w-3/4  rounded-t-none rounded-bl-none" htmlFor="product-booking-modal">Book Now</label>
-                        {/* absolute bottom-10 lg:bottom-16 left-0 w-full */}
+                        <button className='btn btn-sm lg:btn-md border-none bg-red-700 hover:bg-red-800 text-white rounded-t-none rounded-br-none w-1/2' onClick={() => handleReportItem(product, user)}>Report to Admin</button>
+                        <label onClick={() => setItem(product)} className="btn btn-secondary btn-sm lg:btn-md w-1/2  rounded-t-none rounded-bl-none" htmlFor="product-booking-modal">Book Now</label>
                     </div>
                 }
             </div>

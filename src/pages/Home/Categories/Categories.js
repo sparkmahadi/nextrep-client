@@ -8,7 +8,7 @@ const Categories = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        axios.get('https://next-rep-server.vercel.app/categories')
+        axios.get('http://localhost:5000/categories')
             .then(function (response) {
                 setCategories(response.data);
             })

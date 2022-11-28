@@ -46,7 +46,7 @@ const Login = () => {
                 setError('');
                 if(user){
                     saveUser(user.displayName, user.email, 'Buyer');
-                    setUserEmail(user.email);
+                    // setUserEmail(user.email);
                 }
             })
             .catch(e => {
@@ -58,7 +58,7 @@ const Login = () => {
 
     const saveUser = (name, email, accountType) =>{
         let user ={name, email, accountType, verified: false};
-        fetch('https://next-rep-server.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -68,6 +68,9 @@ const Login = () => {
         .then(res => res.json())
         .then(data =>{
             console.log(data);
+            if(data.acknowledged){
+                setUserEmail(user.email);
+            }
         })
     }
 

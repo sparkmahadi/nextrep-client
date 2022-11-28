@@ -31,7 +31,7 @@ const BookingModal = ({ item, setItem, refetch }) => {
             payment: 'Unpaid'
         }       
 
-        fetch(`https://next-rep-server.vercel.app/bookings?email=${user?.email}&productId=${_id}`, {
+        fetch(`http://localhost:5000/bookings?email=${user?.email}&productId=${_id}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

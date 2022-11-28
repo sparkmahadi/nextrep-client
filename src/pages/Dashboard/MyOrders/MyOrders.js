@@ -7,32 +7,31 @@ import { Link } from 'react-router-dom';
 import Spinner from '../../../components/Spinner/Spinner';
 
 const MyOrders = () => {
-    const [loading, setLoading] = useState(false);
     const {user} = useContext(AuthContext);
 
-    const url = `https://next-rep-server.vercel.app/bookings?email=${user?.email}`;
+    const url = `http://localhost:5000/bookings?email=${user?.email}`;
 
-    const { data: orders = [] } = useQuery({
+    const { data: orders = [],isLoading, isFetching} = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
-            setLoading(true);
             const res = await fetch(url,{
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
             });
             const data = await res.json();
-            setLoading(false);
             return data;
         }
     })
-    
-    if(loading){
-        return <Spinner></Spinner>
-    }
-    // console.log(orders);
     return (
         <div className='min-h-screen'>
+                        {
+                isLoading && <Spinner></Spinner>
+            }
+            {
+                
+                isFetching && <Spinner></Spinner>
+            }
             <div className="overflow-x-auto">
                 <table className="lg:table lg:w-full">
 

@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
-import { toast } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 import useSetToken from '../../../hooks/useSetToken';
+import { useEffect } from 'react';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const Register = () => {
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [token] = useSetToken(userEmail);
@@ -14,6 +17,7 @@ const Register = () => {
     const from = location.state?.from?.pathname || '/';
     const handleSubmit = event => {
         event.preventDefault();
+        setLoading(true);
         const form = event.target;
         const name = form.name.value;
         const photoURL = form.photoURL.value;
@@ -28,14 +32,15 @@ const Register = () => {
                 setError('');
                 form.reset();
                 handleUpdateUserProfile(name, photoURL);
-                saveUser(name, email, accountType);
-                setUserEmail(user?.email);
-                toast.success("Account Registered Successfully");
-                navigate(from, { replace: true });
+                if (user) {
+                    saveUser(name, email, accountType);
+                    
+                }
             })
             .catch(e => {
                 console.error(e);
                 setError(e.message);
+                setLoading(false);
             })
     }
 
@@ -45,27 +50,42 @@ const Register = () => {
             photoURL: photoURL
         }
         updateUserProfile(profile)
-            .then(() => {})
+            .then(() => { })
             .catch(e => console.error(e));
     }
 
-    const saveUser = (name, email, accountType) =>{
-        const user ={name, email, accountType, verified: false};
-        fetch('https://next-rep-server.vercel.app/users', {
+    const saveUser = (name, email, accountType) => {
+        const user = { name, email, accountType, verified: false };
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(user)
         })
-        .then(res => res.json())
-        .then(data =>{
-            console.log(data);
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                // setLoading(false);
+                if(data.acknowledged){
+                    toast.success("Account Registered Successfully");
+                    setUserEmail(user?.email);
+                }
+            })
     }
+
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [token, userEmail])
 
     return (
         <div>
+            {
+                loading && <Spinner></Spinner>
+            }
+            <Toaster></Toaster>
             <h2 className='bg-secondary p-2 text-white text-center text-xl lg:text-2xl font-semibold uppercase'>Registration</h2>
             <form data-aos="fade-right" data-aos-duration="1000" onSubmit={handleSubmit} className='container mx-auto bg-white px-10 py-10 rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
 
@@ -76,7 +96,7 @@ const Register = () => {
                         <option value="Seller">Seller</option>
                     </select>
                 </div>
-                
+
                 <div className="mb-6">
                     <label htmlFor="name" className="block mb-2 text-lg font-medium">Your Full Name:</label>
                     <input type="text" name='name' id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Enter Your Full Name" required />

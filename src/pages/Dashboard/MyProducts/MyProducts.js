@@ -2,14 +2,14 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
-import { toast, Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import Spinner from '../../../components/Spinner/Spinner';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    const url = `https://next-rep-server.vercel.app/myProducts?email=${user?.email}`;
+    const url = `http://localhost:5000/myProducts?email=${user?.email}`;
 
-    const { data: myProducts = [], isLoading, refetch } = useQuery({
+    const { data: myProducts = [], isLoading, isFetching, refetch } = useQuery({
         queryKey: ['myProducts', user?.email],
         queryFn: async () => {
             const res = await fetch(url,{
@@ -26,7 +26,7 @@ const MyProducts = () => {
         const agree = window.confirm(`Are you sure to advertise ${name}?`);
         const advertised = { advertised: true };
         if (agree) {
-            fetch(`https://next-rep-server.vercel.app/products/${id}`, {
+            fetch(`http://localhost:5000/products/${id}`, {
                 method: 'PUT',
                 headers:
                     { 'content-type': 'application/json',
@@ -45,15 +45,14 @@ const MyProducts = () => {
         }
     }
 
-    if(isLoading){
-        return <Spinner></Spinner>
-    }
-
     const handleDeleteProduct = (id, name) => {
         const agree = window.confirm(`Are you sure to delete ${name}?`);
         if (agree) {
-            fetch(`https://next-rep-server.vercel.app/products/${id}`, {
-                method: 'DELETE'
+            fetch(`http://localhost:5000/products/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -65,7 +64,13 @@ const MyProducts = () => {
     }
     return (
         <div className='min-h-screen'>
-            <Toaster></Toaster>
+            {
+                isLoading && <Spinner></Spinner>
+            }
+            {
+                
+                isFetching && <Spinner></Spinner>
+            }
             <div className="overflow-x-auto">
                 <table className="lg:table lg:w-full">
 
@@ -91,15 +96,14 @@ const MyProducts = () => {
                                 <td>{pd.postedTime}</td>
                                 <td>{pd.resalePrice}</td>
                                 <td>{pd.status}</td>
-                                {pd.status === 'Available' &&
-                                    <td>
+                                <td>
                                         {
                                             pd.advertised ?
-                                                <button className='p-1 lg:p-2 rounded-lg btn-accent'>Advertised</button>
+                                                <button className='btn btn-sm rounded-lg btn-accent' disabled>Advertised</button>
                                                 :
-                                                <button onClick={() => handleAdvertiseProduct(pd._id, pd.name)} className={`p-1 lg:p-2 rounded-lg btn-secondary`}> Advertise </button>
+                                                <button onClick={() => handleAdvertiseProduct(pd._id, pd.name)} className={`btn btn-sm rounded-lg btn-secondary`}> Advertise </button>
                                         }
-                                    </td>}
+                                    </td>
 
                                 <td><button onClick={() => handleDeleteProduct(pd._id, pd.name)} className='bg-red-600 p-1 lg:p-2 rounded-lg text-white'>Delete</button></td>
                             </tr>)
