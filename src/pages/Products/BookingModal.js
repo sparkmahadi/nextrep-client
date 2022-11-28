@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/UserContext';
+import { Link } from 'react-router-dom';
 
 const BookingModal = ({ item, setItem, refetch }) => {
     const { location, mobile, sellerName, name, resalePrice, sellerEmail, _id } = item;
@@ -71,7 +72,14 @@ const BookingModal = ({ item, setItem, refetch }) => {
 
                         <input name="location" type="text" placeholder="Meeting Location" className="text-lg input-bordered" required/>
                         <br />
-                        <input className='btn btn-primary w-full' type="submit" value="Submit" />
+                        {
+                            user && 
+                            <input className='btn btn-primary w-full' type="submit" value="Submit" />
+                        }
+                        {
+                            !user && 
+                            <p>Please <Link className='text-primary font-bold'>Log In</Link> First to Book</p>
+                        }
                     </form>
 
                 <div className="modal-action">

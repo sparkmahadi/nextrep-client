@@ -5,10 +5,15 @@ import { Toaster } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
 import { useParams} from "react-router-dom"
 import Spinner from '../../components/Spinner/Spinner';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/UserContext';
+import useCheckAccType from '../../hooks/useCheckAccType';
 
 const Products = () => {
     const [item, setItem] = useState(null);
-    let params = useParams();
+    const { user } = useContext(AuthContext);
+    const [accType] = useCheckAccType(user?.email);
+    const params = useParams();
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
@@ -17,6 +22,7 @@ const Products = () => {
             return data;
         }
     })
+
     if (isLoading) {
         return <Spinner></Spinner>
     }
@@ -31,6 +37,8 @@ const Products = () => {
                         key={product._id}
                         product={product}
                         setItem={setItem}
+                        accType={accType}
+                        user={user}
                         refetch={refetch}
                     ></ProductsDetails>)
                 }

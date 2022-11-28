@@ -1,18 +1,18 @@
 import React from 'react';
 import { MdVerified } from "react-icons/md";
-import useCheckAccType from '../../hooks/useCheckAccType';
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/UserContext';
 import { format } from 'date-fns';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
-const ProductsDetails = ({ product, setItem }) => {
-    const { user } = useContext(AuthContext);
-    const [accType] = useCheckAccType(user?.email);
-
+const ProductsDetails = ({ product, setItem, accType, user }) => {
+    
+    const navigate = useNavigate();
     const { condition, description, engineCapacity, img, location, mobile, name, originalPrice, postedTime, purchasedYear, resalePrice, totalRun, usedYear, sellerName, sellerVerified } = product;
 
     const handleReportItem = (product, user) => {
+        if(!user){
+            return navigate('/login')
+        }
         const report = {
             productName: product.name,
             productId: product._id,
@@ -41,13 +41,15 @@ const ProductsDetails = ({ product, setItem }) => {
                 })
         }
     }
+
+
     return (
         <div className="card card-compact border w-full shadow-2xl text-gray-800">
             <Toaster></Toaster>
             <figure><img className='w-full h-80 lg:h-[500px] rounded-t-lg relative' src={img} alt="bike" /></figure>
             <h2 className="text-center text-xl md:text-2xl font-bold bg-primary p-2 text-white uppercase">{name}</h2>
             <div className="card-body">
-                <div className={`${accType === 'Buyer' ? 'mb-10 md:mb-15' : undefined}`}>
+                <div className={`${accType === 'Buyer' || !accType ? 'mb-10 md:mb-15' : undefined}`}>
                     <div className='sm:flex justify-around text-lg lg:text-sm'>
                         <div className='sm:w-1/2 text-center'>
                             <p className='text-sm lg:text-base'><span className='font-bold'>Location:</span> {location}</p>
@@ -77,11 +79,13 @@ const ProductsDetails = ({ product, setItem }) => {
                     <p className='text-center text-sm lg:text-xl font-bold'>TK. {resalePrice}/= </p>
                 </div>
                 {
-                    accType === 'Buyer' &&
+                    accType === 'Buyer' || !accType ?
                     <div className="flex absolute bottom-0 rounded-b-lg w-full right-0 left-0">
                         <button className='btn btn-sm lg:btn-md border-none bg-red-700 hover:bg-red-800 text-white rounded-t-none rounded-br-none w-1/2' onClick={() => handleReportItem(product, user)}>Report to Admin</button>
                         <label onClick={() => setItem(product)} className="btn btn-secondary btn-sm lg:btn-md w-1/2  rounded-t-none rounded-bl-none" htmlFor="product-booking-modal">Book Now</label>
                     </div>
+                    :
+                    undefined
                 }
             </div>
         </div>

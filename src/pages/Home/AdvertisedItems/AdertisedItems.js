@@ -4,9 +4,15 @@ import BookingModal from '../../Products/BookingModal';
 import { useQuery } from '@tanstack/react-query';
 import ProductsDetails from '../../Products/ProductsDetails';
 import Spinner from '../../../components/Spinner/Spinner';
+import { AuthContext } from '../../../contexts/UserContext';
+import { useContext } from 'react';
+import useCheckAccType from '../../../hooks/useCheckAccType';
 
 const AdertisedItems = () => {
     const [item, setItem] = useState(null);
+    const { user } = useContext(AuthContext);
+    const [accType] = useCheckAccType(user?.email);
+    
     const {data: advertisedProducts = [], refetch, isLoading} = useQuery({
         queryKey: ['advertisedProducts'],
         queryFn: async () =>{
@@ -32,6 +38,8 @@ const AdertisedItems = () => {
                             key={product._id}
                             product={product}
                             setItem={setItem}
+                            accType={accType}
+                            user={user}
                         ></ProductsDetails>)
                     }
                 </div>
