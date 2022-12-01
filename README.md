@@ -33,8 +33,3 @@
 - React Helmet Async
 - Vercel
 - JSON Web Token
-
-
-adminEmail: sparkmahadi@gmail.com
-
-adminPassword: sparkm123

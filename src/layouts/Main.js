@@ -8,7 +8,6 @@ const Main = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <Toaster></Toaster>
             <div className='my-outlet min-h-screen'><Outlet></Outlet></div>
             <Footer></Footer>
         </div>

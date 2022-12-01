@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import UserContext from './contexts/UserContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { HelmetProvider } from 'react-helmet-async';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient();
 
@@ -15,7 +16,13 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <UserContext>
         <HelmetProvider>
-          <App />
+          <App >
+          <Toaster
+          toastOptions={{
+            duration: 10000,
+          }}
+          ></Toaster>
+          </App>
         </HelmetProvider>
       </UserContext>
     </QueryClientProvider>
