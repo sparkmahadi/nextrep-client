@@ -135,7 +135,7 @@ const Register = () => {
 
                 <div className="mb-6">
                     <label htmlFor="photoURL" className="block mb-2 text-lg font-medium">Your Photo</label>
-                    <input type="file" name='photoURL' id="photo" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Enter Your Full Name" />
+                    <input type="file" name='photoURL' id="photo" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Enter Your Full Name" required/>
                 </div>
 
                 <div className="mb-6">
