@@ -33,8 +33,8 @@ const Reviews = () => {
     ]
     return (
         <div data-aos="zoom-in" className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
-            <h2 className='text-xl md:text-3xl font-bold text-center uppercase divider'>User Reviews</h2>
-            <div className='pt-3'>
+            <h2 className='text-xl md:text-2xl font-bold text-center uppercase divider'>User Reviews</h2>
+            <div className='pt-5'>
                 <div data-aos="fade-left" className=''>
                     <Swiper
                         modules={[Navigation]}
