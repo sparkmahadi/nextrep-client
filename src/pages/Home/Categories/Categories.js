@@ -11,7 +11,7 @@ const Categories = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get('https://next-rep-server.vercel.app/categories')
+        axios.get('http://localhost:5000/categories')
             .then(function (response) {
                 setCategories(response.data);
                 setLoading(false);
@@ -23,7 +23,7 @@ const Categories = () => {
     }, [])
 
     return (
-        <div className='"px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
+        <div className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
             {
                 loading && <Spinner></Spinner>
             }

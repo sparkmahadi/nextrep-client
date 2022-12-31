@@ -24,7 +24,7 @@ const ProductsDetails = ({ product, setItem, accType, user }) => {
         }
         const agree = window.confirm(`Are you sure to report ${product.name}`)
         if (agree) {
-            fetch(`https://next-rep-server.vercel.app/reportedItems?email=${user.email}&productId=${product._id}`, {
+            fetch(`http://localhost:5000/reportedItems?email=${user.email}&productId=${product._id}`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

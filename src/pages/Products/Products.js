@@ -17,7 +17,7 @@ const Products = () => {
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`https://next-rep-server.vercel.app/category/${params.id}`);
+            const res = await fetch(`http://localhost:5000/category/${params.id}`);
             const data = await res.json();
             return data;
         }
@@ -27,7 +27,8 @@ const Products = () => {
         return <Spinner></Spinner>
     }
     return (
-        <div className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 min-h-screen font-primary'>
+        <div data-aos="fade-up"
+        data-aos-duration="1000" className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 min-h-screen font-primary'>
             <Toaster></Toaster>
             <h2 className='text-gray-900 text-xl md:text-3xl font-bold text-center mb-5 lg:mb-10 uppercase divider'>Products</h2>
 

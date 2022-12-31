@@ -7,7 +7,7 @@ const ReportedItems = () => {
     const { data: reportedItems = [], refetch, isLoading, isFetching } = useQuery({
         queryKey: ['reportedItems'],
         queryFn: async () => {
-            const res = await fetch('https://next-rep-server.vercel.app/reportedItems', {
+            const res = await fetch('http://localhost:5000/reportedItems', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -21,7 +21,7 @@ const ReportedItems = () => {
         const agree = window.confirm(`Are you sure to delete ${name}?`);
         if (agree) {
             handleDeleteReport(id, name);
-            fetch(`https://next-rep-server.vercel.app/products/${id}`, {
+            fetch(`http://localhost:5000/products/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -38,7 +38,7 @@ const ReportedItems = () => {
     }
 
     const handleDeleteReport = (id, name) => {
-        fetch(`https://next-rep-server.vercel.app/reportedItems/${id}`, {
+        fetch(`http://localhost:5000/reportedItems/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

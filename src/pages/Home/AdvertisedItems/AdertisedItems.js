@@ -16,7 +16,7 @@ const AdertisedItems = () => {
     const {data: advertisedProducts = [], refetch, isLoading} = useQuery({
         queryKey: ['advertisedProducts'],
         queryFn: async () =>{
-            const res = await fetch(`https://next-rep-server.vercel.app/advertisedProducts`);
+            const res = await fetch(`http://localhost:5000/advertisedProducts`);
             const data = await res.json();
             return data;
         }
@@ -29,7 +29,8 @@ const AdertisedItems = () => {
         {
             advertisedProducts.length > 0 &&
             <div className='px-4 pb-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
-            <h2 className='text-xl pb-7 md:text-3xl font-bold text-center uppercase divider'>Advertised Items</h2>
+            <h2 data-aos="fade-up"
+        data-aos-duration="1000" className='text-xl pb-7 md:text-3xl font-bold text-center uppercase divider'>Advertised Items</h2>
             <div className=''>
                 
                 <div className='grid lg:grid-cols-2 3xl:grid-cols-3 gap-5 font-secondary'>

@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/UserContext';
 import { Link } from 'react-router-dom';
 
-const BookingModal = ({ item, setItem, refetch }) => {
+const BookingModal = ({ item, setItem }) => {
     const { location, mobile, sellerName, name, resalePrice, sellerEmail, _id } = item;
 
     const { user } = useContext(AuthContext);
@@ -32,7 +32,7 @@ const BookingModal = ({ item, setItem, refetch }) => {
             payment: 'Unpaid'
         }       
 
-        fetch(`https://next-rep-server.vercel.app/bookings?email=${user?.email}&productId=${_id}`, {
+        fetch(`http://localhost:5000/bookings?email=${user?.email}&productId=${_id}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

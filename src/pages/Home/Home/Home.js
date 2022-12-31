@@ -4,6 +4,8 @@ import AdertisedItems from '../AdvertisedItems/AdertisedItems';
 import Banner from '../Banner/Banner';
 import Categories from '../Categories/Categories';
 import PowerfulBike from '../PowerfulBike/PowerfulBike';
+import Reviews from '../Reviews/Reviews';
+import Search from '../Search/Search';
 
 const Home = () => {
     return (
@@ -13,7 +15,9 @@ const Home = () => {
             </Helmet>
             <Banner></Banner>
             <Categories></Categories>
+            <Search></Search>
             <AdertisedItems></AdertisedItems>
+            <Reviews></Reviews>
             <PowerfulBike></PowerfulBike>
         </div>
     );

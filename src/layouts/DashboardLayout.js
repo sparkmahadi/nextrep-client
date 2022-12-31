@@ -20,9 +20,10 @@ const DashboardLayout = () => {
             </Helmet>
             <Toaster></Toaster>
             <div className='custom-grid lg:grid gap-5 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
-                <div className='mx-auto'>
+                <div data-aos="fade-up"
+                    data-aos-duration="1000" className='mx-auto'>
                     <ul className="menu bg-base-100 sm:w-56 mx-auto">
-                    <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/profile'>My Profile</NavLink></li>
+                        <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/profile'>My Profile</NavLink></li>
                         {
                             accType === 'Buyer' &&
                             <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/myorders'>My Orders</NavLink></li>
@@ -46,7 +47,8 @@ const DashboardLayout = () => {
                         }
                     </ul>
                 </div>
-                <div className='min-h-screen'>
+                <div data-aos="fade-down"
+                    data-aos-duration="1000" className='min-h-screen'>
                     <Outlet></Outlet>
                 </div>
             </div>

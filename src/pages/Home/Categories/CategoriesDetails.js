@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const CategoriesDetails = ({ category }) => {
     const {img, brandName, brandId} = category;
     return (
-        <Link className='mx-auto' to={`/category/${brandId}`}>
+        <Link data-aos='fade-up' data-aos-duration="1000" className='mx-auto' to={`/category/${brandId}`}>
             <div className="card card-compact w-44 bg-base-100 shadow-xl">
                 <figure><img className='' src={img} alt="brands" /></figure>
                 <div className="card-body">

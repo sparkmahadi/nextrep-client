@@ -8,7 +8,7 @@ const AllSellers = () => {
     const { data: users = [], isLoading, isFetching, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('https://next-rep-server.vercel.app/sellers', {
+            const res = await fetch('http://localhost:5000/sellers', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -22,7 +22,7 @@ const AllSellers = () => {
         const agree = window.confirm(`Are you sure to verifiy '${name}' with email: '${email}'?`);
         const verified = { verified: true }
         if (agree) {
-            fetch(`https://next-rep-server.vercel.app/users/${email}`, {
+            fetch(`http://localhost:5000/users/${email}`, {
                 method: 'PUT',
                 headers:
                 {
@@ -35,7 +35,7 @@ const AllSellers = () => {
                 .then(data => {
                     console.log(data)
                     if (data.modifiedCount > 0) {
-                        fetch(`https://next-rep-server.vercel.app/products/sellerVerification/${email}`, {
+                        fetch(`http://localhost:5000/products/sellerVerification/${email}`, {
                             method: 'PUT',
                             headers:
                             {
@@ -60,7 +60,7 @@ const AllSellers = () => {
     const handleDeleteUser = user => {
         const agree = window.confirm(`Are you sure to delete ${user?.email}?`);
         if (agree) {
-            fetch(`https://next-rep-server.vercel.app/users/${user._id}`, {
+            fetch(`http://localhost:5000/users/${user._id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`

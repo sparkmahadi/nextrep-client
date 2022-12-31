@@ -81,7 +81,7 @@ const Register = () => {
 
     const saveUser = (name, email, accountType) => {
         const user = { name, email, accountType, verified: false };
-        fetch('https://next-rep-server.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
