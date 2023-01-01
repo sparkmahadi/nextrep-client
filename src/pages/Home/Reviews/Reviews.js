@@ -110,7 +110,7 @@ const Reviews = () => {
             </div>
 
             <div className='mt-5'>
-                <h5 className='text-center mb-3 font-semibold'>Add Your Review</h5>
+                <h5 data-aos="fade-left" data-aos-duration="1000" className='text-center mb-3 font-semibold'>Add Your Review</h5>
                 {
                     user &&
                     <form data-aos="fade-right" data-aos-duration="1000" onSubmit={handleAddReview} className='container mx-auto bg-white px-10  rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
