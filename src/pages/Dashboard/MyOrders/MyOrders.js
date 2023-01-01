@@ -9,7 +9,7 @@ import Spinner from '../../../components/Spinner/Spinner';
 const MyOrders = () => {
     const {user} = useContext(AuthContext);
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `https://next-rep-server.vercel.app/bookings?email=${user?.email}`;
 
     const { data: orders = [],isLoading, isFetching} = useQuery({
         queryKey: ['orders', user?.email],

@@ -11,7 +11,7 @@ const Categories = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get('http://localhost:5000/categories')
+        axios.get('https://next-rep-server.vercel.app/categories')
             .then(function (response) {
                 setCategories(response.data);
                 setLoading(false);

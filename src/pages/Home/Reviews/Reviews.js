@@ -19,7 +19,7 @@ const Reviews = () => {
     const { data: reviews = [], refetch, isLoading } = useQuery({
         queryKey: ['reviews'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/reviews`);
+            const res = await fetch(`https://next-rep-server.vercel.app/reviews`);
             const data = await res.json();
             return data;
         }
@@ -31,7 +31,7 @@ const Reviews = () => {
         const reviewDetails = event.target.reviewDetails.value;
         const review = { name: user.displayName, details: reviewDetails }
         if (review) {
-            fetch('http://localhost:5000/reviews', {
+            fetch('https://next-rep-server.vercel.app/reviews', {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'

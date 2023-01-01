@@ -22,7 +22,7 @@ const Search = () => {
         const searchText = form.searchText.value;
 
         if (searchText) {
-            fetch(`http://localhost:5000/search/${searchText}`)
+            fetch(`https://next-rep-server.vercel.app/search/${searchText}`)
                 .then(res => res.json())
             .then(data => {
                 console.log(data);

@@ -18,7 +18,7 @@ const Checkout = ({ bookedInfo }) => {
 
     useEffect(() => {
         setProcessing(true);
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://next-rep-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const Checkout = ({ bookedInfo }) => {
                         payment: 'Paid',
                         paymentTime: format(new Date(), 'PP')
                     };
-                    fetch(`http://localhost:5000/bookings/${_id}`, {
+                    fetch(`https://next-rep-server.vercel.app/bookings/${_id}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json',
@@ -90,13 +90,13 @@ const Checkout = ({ bookedInfo }) => {
                             if (data.modifiedCount > 0) {
                                 console.log('updated as paid in orders');
                                 // to update the product as sold in productsCollection. First get with id(string), then update with id(objectId)
-                                fetch(`http://localhost:5000/products/${productId}`)
+                                fetch(`https://next-rep-server.vercel.app/products/${productId}`)
                                     .then(res => res.json())
                                     .then(data => {
                                         console.log(data)
                                         const sold = {status: 'Sold'};
                                         if(Object.keys(data).length){
-                                            fetch(`http://localhost:5000/products/${data._id}`,{
+                                            fetch(`https://next-rep-server.vercel.app/products/${data._id}`,{
                                                 method: 'PUT',
                                                 headers: {
                                                     'content-type' : 'application/json',
