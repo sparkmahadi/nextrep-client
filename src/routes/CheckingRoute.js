@@ -10,7 +10,7 @@ const CheckingRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading || setAccType) {
-        return <Spinner></Spinner>
+        return <div className="custom-align"><Spinner></Spinner></div>
     }
 
     if (user && accType) {

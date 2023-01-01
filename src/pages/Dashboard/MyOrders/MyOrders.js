@@ -26,11 +26,11 @@ const MyOrders = () => {
     return (
         <div className='min-h-screen'>
                         {
-                isLoading && <Spinner></Spinner>
+                isLoading && <div className="custom-align"><Spinner></Spinner></div>
             }
             {
                 
-                isFetching && <Spinner></Spinner>
+                isFetching && <div className="custom-align"><Spinner></Spinner></div>
             }
             <div className="overflow-x-auto">
                 <table className="lg:table lg:w-full">

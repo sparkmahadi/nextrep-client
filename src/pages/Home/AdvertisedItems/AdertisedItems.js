@@ -22,7 +22,7 @@ const AdertisedItems = () => {
         }
     })
     if(isLoading){
-        return <div className='custom-align'><Spinner></Spinner></div>
+        return <div className='custom-align'><div className="custom-align"><Spinner></Spinner></div></div>
     }
     return (
         <>

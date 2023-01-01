@@ -38,7 +38,7 @@ const Profile = () => {
         <div className='min-h-custom font-secondary'>
             <Toaster />
             {
-                loading && <Spinner></Spinner>
+                loading && <div className="custom-align"><Spinner></Spinner></div>
             }
             <h2 className='p-2 text-gray-900 text-center text-2xl font-semibold'>My Profile</h2>
             <div className='mx-auto bg-gray-200 px-10 my-5 py-10 rounded-lg text-gray-900 md:w-2/3'>

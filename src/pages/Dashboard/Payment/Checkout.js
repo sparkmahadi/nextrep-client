@@ -151,7 +151,7 @@ const Checkout = ({ bookedInfo }) => {
                 </>
             }
             {
-                processing && <Spinner></Spinner>
+                processing && <div className="custom-align"><Spinner></Spinner></div>
             }
         </div>
     );

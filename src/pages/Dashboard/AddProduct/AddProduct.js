@@ -89,7 +89,7 @@ const AddProduct = () => {
                 <h2 className="text-3xl text-center">Add A Product</h2>
                 <p className='lg:px-20 text-center'>Please fill in all the information very carefully and correctly. Otherwise, Buyers will be mislead and the chance of sell will be decreased.</p>
                 {
-                    uploading && <div className='custom-align'><Spinner></Spinner></div>
+                    uploading && <div className='custom-align'><div className="custom-align"><Spinner></Spinner></div></div>
                 }
                 <form onSubmit={handleSubmit(handleAddProduct)} className='mx-auto max-w-xl'>
 

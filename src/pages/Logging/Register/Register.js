@@ -110,7 +110,7 @@ const Register = () => {
                 <title>NextRep | Register</title>
             </Helmet>
             {
-                loading && <Spinner></Spinner>
+                loading && <div className="custom-align"><Spinner></Spinner></div>
             }
             <h2 className='bg-secondary p-2 text-white text-center text-xl lg:text-2xl font-semibold uppercase'>Registration</h2>
             <form data-aos="fade-right" data-aos-duration="1000" onSubmit={handleSubmit} className='container mx-auto bg-white px-10 py-10 rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>

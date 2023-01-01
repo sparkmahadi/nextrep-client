@@ -25,7 +25,7 @@ const Categories = () => {
     return (
         <div className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
             {
-                loading && <Spinner></Spinner>
+                loading && <div className="custom-align"><Spinner></Spinner></div>
             }
             <h2 className='text-xl md:text-2xl font-bold text-center uppercase divider'>Brands</h2>
             <p className='md:text-xl text-center my-3'>Please Select Your Favorite Brand</p>

@@ -24,7 +24,7 @@ const Products = () => {
     })
 
     if (isLoading) {
-        return <Spinner></Spinner>
+        return <div className="custom-align"><Spinner></Spinner></div>
     }
     return (
         <div data-aos="fade-up"

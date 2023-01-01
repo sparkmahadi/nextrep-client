@@ -10,6 +10,7 @@ import ProductsDetails from '../../Products/ProductsDetails';
 const Search = () => {
     const [loading, setLoading] = useState(false);
     const [found, setFound] = useState([]);
+    const [displayFound, setDisplayFound] = useState(false);
     const [item, setItem] = useState(null);
     const { user } = useContext(AuthContext);
     const [accType] = useCheckAccType(user?.email);
@@ -26,6 +27,7 @@ const Search = () => {
             .then(data => {
                 console.log(data);
                 setFound(data);
+                setDisplayFound(true);
                 setLoading(false);
             })
         }
@@ -41,10 +43,10 @@ const Search = () => {
                 <button type='submit' className='btn btn-secondary'>Search</button>
             </form>
             {
-                found.length>0 && <p className='text-center text-lg mb-5'>{found.length} items found!!!</p>
+                found.length>0 && displayFound && <p className='text-center text-lg mb-5'>{found.length} items found!!!</p>
             }
             {
-                !found.length && <p className='text-center text-lg mb-5'>Sorry, No items found!!!</p>
+                !found.length && displayFound && <p className='text-center text-lg mb-5'>Sorry, No items found!!!</p>
             }
             <div className='my-5'>
                 
@@ -66,7 +68,7 @@ const Search = () => {
                 }
             </div>
             {
-                loading && <Spinner></Spinner>
+                loading && <div className="custom-align"><Spinner></Spinner></div>
             }
         </div>
     );
