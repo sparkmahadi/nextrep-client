@@ -12,6 +12,7 @@ import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import Spinner from '../../../components/Spinner/Spinner';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Reviews = () => {
     const [loading, setLoading] = useState(false);
@@ -112,7 +113,7 @@ const Reviews = () => {
             <div className='mt-5'>
                 <h5 data-aos="fade-left" data-aos-duration="1000" className='text-center mb-3 font-semibold'>Add Your Review</h5>
                 {
-                    user &&
+                    user ?
                     <form data-aos="fade-right" data-aos-duration="1000" onSubmit={handleAddReview} className='container mx-auto bg-white px-10  rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
 
                         <div className="mb-3">
@@ -120,6 +121,8 @@ const Reviews = () => {
                         </div>
                         <button type="submit" className="btn btn-sm btn-primary block mx-auto normal-case">Submit</button>
                     </form>
+                    :
+                    <p data-aos="fade-right" data-aos-duration="1000" className='text-center'>Please <Link className='text-sky-600' to={'/login'}>Login</Link> to Add Reviews.</p>
                 }
             </div>
         </div>
