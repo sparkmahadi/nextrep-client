@@ -3,7 +3,7 @@ import React from 'react';
 const PowerfulBike = () => {
     return (
         <div className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
-            <h2 className='text-xl md:text-2xl font-bold text-center uppercase divider mb-3 whitespace-normal lg:whitespace-nowrap'>World's Most Powerful Bike</h2>
+            <h2 className='text-xl md:text-2xl font-bold text-center uppercase divider whitespace-normal lg:whitespace-nowrap'>World's Most Powerful Bike</h2>
             <div className="hero">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <img data-aos='fade-left' data-aos-duration='1000' src="https://i.ibb.co/7j9chXC/kawasaki-ninja.png" alt='' className="max-w-2xl w-full rounded-lg" />

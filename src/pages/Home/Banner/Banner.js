@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Typewriter from 'typewriter-effect';
 
 const Banner = () => {
     return (
@@ -9,7 +10,15 @@ const Banner = () => {
                 <div className="hero-content text-center">
                     <div className="">
                         <p className='mb-2 lg:mb-4 lg:text-3xl font-bold text-red-500 uppercase'>Making Your Dreams Come True</p>
-                        <h2 className="mb-2 lg:mb-5 text-3xl lg:text-5xl 2xl:text-7xl text-white font-bold font-primary">GET YOUR DREAM MOTORCYCLE</h2>
+                        <div className="mb-2 lg:mb-5 text-3xl lg:text-5xl text-white font-bold font-primary">
+                            <Typewriter
+                                options={{
+                                    strings: ['GET YOUR DREAM MOTORCYCLE'],
+                                    autoStart: true,
+                                    loop: true,
+                                }}
+                            />
+                        </div>
                         <p className="mb-2 lg:mb-5 lg:text-xl 2xl:text-3xl text-white">Buy or sell your motorcycle with our growing community.</p>
                         <Link to='/categories'><button className="btn-sm btn lg:btn-md btn-secondary text-white">Get Started</button></Link>
                     </div>

@@ -34,7 +34,7 @@ const Search = () => {
     return (
         <div data-aos="fade-up"
         data-aos-duration="1000" className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
-            <h2 className='text-xl md:text-2xl font-bold text-center uppercase divider mb-3'>Find Your Bike</h2>
+            <h2 className='text-xl md:text-2xl font-bold text-center uppercase divider'>Find Your Bike</h2>
             <p className='md:text-xl text-center my-3'>Find your desired motorcycle with filters</p>
             <form onSubmit={handleSearch} className='flex justify-center gap-5 items-center lg:py-5'>
                 <input name='searchText' className='input input-bordered w-1/2' type="text" placeholder='Search locations, product names, brands...' />
@@ -42,6 +42,9 @@ const Search = () => {
             </form>
             {
                 found.length>0 && <p className='text-center text-lg mb-5'>{found.length} items found!!!</p>
+            }
+            {
+                !found.length && <p className='text-center text-lg mb-5'>Sorry, No items found!!!</p>
             }
             <div className='my-5'>
                 
