@@ -27,12 +27,13 @@ const Products = () => {
         return <div className="custom-align"><Spinner></Spinner></div>
     }
     return (
-        <div data-aos="fade-up"
-        data-aos-duration="1000" className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 min-h-screen font-primary'>
+        <div className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 min-h-screen font-primary'>
             <Toaster></Toaster>
-            <h2 className='text-gray-900 text-xl md:text-3xl font-bold text-center mb-5 lg:mb-10 uppercase divider'>Products</h2>
+            <h2 data-aos="fade-down"
+        data-aos-duration="1000" className='text-gray-900 text-xl md:text-3xl font-bold text-center mb-5 lg:mb-10 uppercase divider'>Products</h2>
 
-            <div className='grid lg:grid-cols-2 3xl:grid-cols-3 gap-5 font-secondary justify-center'>
+            <div data-aos="fade-right"
+        data-aos-duration="1000" className='grid lg:grid-cols-2 3xl:grid-cols-3 gap-5 font-secondary justify-center'>
                 {
                     products.map(product => <ProductsDetails
                         key={product._id}
