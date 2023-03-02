@@ -5,7 +5,7 @@ import Typewriter from 'typewriter-effect';
 const Banner = () => {
     return (
         <div>
-            <div data-aos="zoom-in" data-aos-duration="1000" className="hero" style={{ backgroundImage: `url("https://i.ibb.co/BKNzDnL/yzf-r15-right-front-three-quarter-7.png")` }}>
+            <div data-aos="zoom-in" data-aos-duration="2000" className="hero" style={{ backgroundImage: `url("https://i.ibb.co/BKNzDnL/yzf-r15-right-front-three-quarter-7.png")` }}>
                 <div className="hero-overlay bg-opacity-80 py-48 lg:py-72 2xl:py-96"></div>
                 <div className="hero-content text-center">
                     <div className="">

@@ -35,7 +35,7 @@ const Search = () => {
 
     return (
         <div data-aos="fade-up"
-        data-aos-duration="1000" className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
+        data-aos-duration="2000" className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
             <h2 className='text-xl md:text-2xl font-bold text-center uppercase divider'>Find Your Bike</h2>
             <p className='md:text-xl text-center my-3'>Find your desired motorcycle with filters</p>
             <form onSubmit={handleSearch} className='flex justify-center gap-5 items-center lg:py-5'>

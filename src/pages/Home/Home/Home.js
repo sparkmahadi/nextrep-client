@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import AdertisedItems from '../AdvertisedItems/AdertisedItems';
 import Banner from '../Banner/Banner';
+import Banner2 from '../Banner/Banner2';
 import BikeReviews from '../BikeReviews/BikeReviews';
 import Categories from '../Categories/Categories';
 import HowItWorks from '../HowItWorks/HowItWorks';
@@ -15,7 +16,8 @@ const Home = () => {
             <Helmet>
                 <title>NextRep | Home</title>
             </Helmet>
-            <Banner></Banner>
+            {/* <Banner></Banner> */}
+            <Banner2></Banner2>
             <Categories></Categories>
             <Search></Search>
             <AdertisedItems></AdertisedItems>

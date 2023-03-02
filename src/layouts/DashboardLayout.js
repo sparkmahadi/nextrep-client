@@ -21,7 +21,7 @@ const DashboardLayout = () => {
             <Toaster></Toaster>
             <div className='custom-grid lg:grid gap-5 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
                 <div data-aos="fade-up"
-                    data-aos-duration="1000" className='mx-auto'>
+                    data-aos-duration="2000" className='mx-auto'>
                     <ul className="menu bg-base-100 sm:w-56 mx-auto">
                         <li className='lg:text-lg font-semibold bg-primary text-white rounded-lg mb-2'><NavLink to='/dashboard/profile'>My Profile</NavLink></li>
                         {
@@ -48,7 +48,7 @@ const DashboardLayout = () => {
                     </ul>
                 </div>
                 <div data-aos="fade-down"
-                    data-aos-duration="1000" className='min-h-screen'>
+                    data-aos-duration="2000" className='min-h-screen'>
                     <Outlet></Outlet>
                 </div>
             </div>

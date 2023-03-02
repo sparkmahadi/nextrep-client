@@ -32,17 +32,17 @@ const BikeReviews = () => {
     ]
     return (
         <div className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
-            <h2 data-aos="fade-left" data-aos-duration="1000" className='text-xl md:text-2xl font-bold text-center uppercase divider'>Bike Reviews</h2>
-            <div data-aos="fade-right" data-aos-duration="1000" className='pt-5 grid lg:grid-cols-3 gap-5 lg:gap-10'>
+            <h2 data-aos="fade-left" data-aos-duration="2000" className='text-xl md:text-2xl font-bold text-center uppercase divider'>Bike Reviews</h2>
+            <div data-aos="fade-right" data-aos-duration="2000" className='pt-5 grid lg:grid-cols-3 gap-5 lg:gap-10'>
                 {
                     reviews.map((review, i) =>
-                        <div data-aos="zoom-in" data-aos-duration="1000" key={i} className="card w-96 bg-base-100 shadow-xl">
+                        <div data-aos="zoom-in" data-aos-duration="2000" key={i} className="card w-96 bg-base-100 shadow-xl">
                             <figure className='h-64'><img src={review.img} alt="Shoes" /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{review.title}</h2>
                                 <p>{review.details.slice(0, 200)}...</p>
                                 <div className="card-actions justify-end">
-                                    <label onClick={()=>setShowedReview(review)} htmlFor="bike-review-modal" className="btn btn-sm btn-primary normal-case">View Details</label>
+                                    <label onClick={() => setShowedReview(review)} htmlFor="bike-review-modal" className="btn btn-sm btn-secondary normal-case">View Details</label>
                                 </div>
                             </div>
                         </div>
@@ -52,12 +52,17 @@ const BikeReviews = () => {
 
             {/* Put this part before </body> tag */}
             <input type="checkbox" id="bike-review-modal" className="modal-toggle" />
-            <label htmlFor="bike-review-modal" className="modal cursor-pointer">
-                <label className="modal-box relative" htmlFor="">
-                    <h3 className="text-lg font-bold text-center mb-5">{showedReview.title}</h3>
+
+            <label htmlFor="bike-review-modal" className="modal">
+                <div className="modal-box w-11/12 max-w-5xl">
+                <h3 className="text-lg font-bold text-center mb-5">{showedReview.title}</h3>
                     <img src={showedReview.img} alt="" />
                     <p className="py-4">{showedReview.details}</p>
-                </label>
+
+                    <div className="modal-action">
+                        <label htmlFor="bike-review-modal" className="btn">Close</label>
+                    </div>
+                </div>
             </label>
         </div>
     );

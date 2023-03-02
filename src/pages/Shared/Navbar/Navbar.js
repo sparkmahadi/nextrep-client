@@ -68,7 +68,6 @@ const Navbar = () => {
                         </li>
                         <li>
                             <div to='/login'
-                                className="cursor-pointer bg-slate-500 flex items-center justify-center gap-2 py-1 px-2 text-white hover:bg-sky-700 duration-200 rounded shadow-md"
 
                             >
                                 {
@@ -86,11 +85,11 @@ const Navbar = () => {
                                                         </div>
                                                 }
                                             </Link>
-                                            <button onClick={handleLogOut}>Log Out</button>
+                                            <button className="btn btn-sm btn-secondary normal-case" onClick={handleLogOut}>Log Out</button>
                                         </div>
                                         :
                                         <>
-                                            <Link to='/login'>Log In</Link>
+                                            <Link to='/login' className="btn btn-sm btn-secondary normal-case">Log In</Link>
                                         </>
                                 }
                             </div>

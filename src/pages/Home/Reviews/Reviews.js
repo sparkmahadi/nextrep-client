@@ -52,7 +52,7 @@ const Reviews = () => {
         }
     }
     return (
-        <div data-aos="zoom-in" className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
+        <div data-aos="zoom-in" data-aos-duration="2000" className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
             <h2 className='text-xl md:text-2xl font-bold text-center uppercase divider'>User Reviews</h2>
             {
                 isLoading && <div className="custom-align"><Spinner></Spinner></div>
@@ -61,7 +61,7 @@ const Reviews = () => {
                 loading && <div className="custom-align"><Spinner></Spinner></div>
             }
             <div className='pt-5'>
-                <div data-aos="fade-left" className=''>
+                <div data-aos="fade-left" className='cursor-pointer'>
                     <Swiper
                         modules={[Navigation]}
                         navigation
@@ -111,18 +111,18 @@ const Reviews = () => {
             </div>
 
             <div className='mt-5'>
-                <h5 data-aos="fade-left" data-aos-duration="1000" className='text-center text-xl md:text-2xl mb-3 font-semibold'>Add Your Review</h5>
+                <h5 data-aos="fade-left" data-aos-duration="2000" className='text-center text-xl md:text-2xl mb-3 font-semibold'>Add Your Review</h5>
                 {
                     user ?
-                    <form data-aos="fade-right" data-aos-duration="1000" onSubmit={handleAddReview} className='container mx-auto bg-white px-10  rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
+                    <form data-aos="fade-right" data-aos-duration="2000" onSubmit={handleAddReview} className='container mx-auto bg-white px-10  rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
 
                         <div className="mb-3">
                             <textarea type="text" name='reviewDetails' id="reviewDetails" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Write your opinions..." required />
                         </div>
-                        <button type="submit" className="btn btn-sm btn-primary block mx-auto normal-case">Submit</button>
+                        <button type="submit" className="btn btn-sm btn-secondary block mx-auto normal-case">Submit</button>
                     </form>
                     :
-                    <p data-aos="fade-right" data-aos-duration="1000" className='text-center'>Please <Link className='text-sky-600' to={'/login'}>Login</Link> to Add Reviews.</p>
+                    <p data-aos="fade-right" data-aos-duration="2000" className='text-center'>Please <Link className='text-sky-600' to={'/login'}>Login</Link> to Add Reviews.</p>
                 }
             </div>
         </div>

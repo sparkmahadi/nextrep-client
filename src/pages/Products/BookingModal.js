@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/UserContext';
 import { Link } from 'react-router-dom';
 
-const BookingModal = ({ item, setItem }) => {
+const BookingModal = ({ item, setItem, setProductShow }) => {
     const { location, mobile, sellerName, name, resalePrice, sellerEmail, _id } = item;
 
     const { user } = useContext(AuthContext);
@@ -30,7 +30,7 @@ const BookingModal = ({ item, setItem }) => {
             price: resalePrice,
             meetingLocation,
             payment: 'Unpaid'
-        }       
+        }
 
         fetch(`https://next-rep-server.vercel.app/bookings?email=${user?.email}&productId=${_id}`, {
             method: 'POST',
@@ -45,7 +45,8 @@ const BookingModal = ({ item, setItem }) => {
                 console.log(data);
                 if (data.acknowledged) {
                     setItem(null);
-                    toast.success('Bike is booked');                    
+                    setProductShow(null);
+                    toast.success('Bike is booked');
                 }
                 else {
                     toast.error(data.message);
@@ -53,6 +54,7 @@ const BookingModal = ({ item, setItem }) => {
             })
 
         setItem(null);
+        setProductShow(null);
     }
     return (
         <div className='text-gray-900'>
@@ -68,23 +70,23 @@ const BookingModal = ({ item, setItem }) => {
 
                         <input name="price" type="text" defaultValue={resalePrice} disabled placeholder="Email Address" className="input-bordered text-lg" />
 
-                        <input name="phone" type="text" placeholder="Your Mobile Number" className="text-lg input-bordered" required/>
+                        <input name="phone" type="text" placeholder="Your Mobile Number" className="text-lg input-bordered" required />
 
-                        <input name="location" type="text" placeholder="Meeting Location" className="text-lg input-bordered" required/>
+                        <input name="location" type="text" placeholder="Meeting Location" className="text-lg input-bordered" required />
                         <br />
                         {
-                            user && 
-                            <input className='btn btn-primary w-full' type="submit" value="Submit" />
+                            user &&
+                            <input className='btn btn-secondary w-full' type="submit" value="Submit" />
                         }
                         {
-                            !user && 
+                            !user &&
                             <p>Please <Link to='/login' className='text-primary font-bold'>Log In</Link> First to Book</p>
                         }
                     </form>
 
-                <div className="modal-action">
-                    <label onClick={() => setItem(null)} htmlFor="product-booking-modal" className="btn btn-accent w-full">Cancel</label>
-                </div>
+                    <div className="modal-action">
+                        <label onClick={() => setItem(null)} htmlFor="product-booking-modal" className="btn btn-accent w-full">Cancel</label>
+                    </div>
                 </div>
             </div>
         </div>
