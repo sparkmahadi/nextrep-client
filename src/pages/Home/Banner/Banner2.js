@@ -34,7 +34,7 @@ export default function Banner2() {
         </svg>
         <rect width="100%" height="100%" strokeWidth={0} fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)" />
       </svg>
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:py-20 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-5">
+      <div className="mx-auto max-w-7xl px-4 md:px-24 py-12 sm:py-20 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-5">
         <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
           <div className="flex">
             <div className="relative flex items-center gap-x-4 rounded-full py-1 px-4 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
@@ -60,9 +60,9 @@ export default function Banner2() {
             >
               Get started
             </Link>
-            <a href="/aboutus" className="text-base font-semibold leading-7 text-gray-900">
+            {/* <a href="/aboutus" className="text-base font-semibold leading-7 text-gray-900">
               Learn more <span aria-hidden="true">→</span>
-            </a>
+            </a> */}
           </div>
         </div>
         <div className="mt-16 sm:mt-24 lg:mt-0">

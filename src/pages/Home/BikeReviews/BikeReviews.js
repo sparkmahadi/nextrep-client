@@ -16,12 +16,12 @@ const BikeReviews = () => {
             img: 'https://i.ibb.co/ng8BH5R/gsxr.jpg',
             date: '26-Feb-2022'
         },
-        {
-            title: 'Yamaha R15 Fi-ABS Test Ride Review ',
-            details: "Yamaha r15 is beautiful in look and power bike.It mileage is 45 better than copaired to other sports bike.The price is uder 2lakhs with all paper works.Good comfort in riding.Excellent grip in wheels.Good shock ups.Good control in riding at speed also.Good look from all the angles.The headlight is also better one.It is comfortable for sitting two persons also.Goodlook for all persons.Keep ride better and enjoy.",
-            img: 'https://i.ibb.co/Rp1TTJC/yamaha-r15-v4-dark-right-side-view-930x620.webp',
-            date: '26-Feb-2022'
-        },
+        // {
+        //     title: 'Yamaha R15 Fi-ABS Test Ride Review ',
+        //     details: "Yamaha r15 is beautiful in look and power bike.It mileage is 45 better than copaired to other sports bike.The price is uder 2lakhs with all paper works.Good comfort in riding.Excellent grip in wheels.Good shock ups.Good control in riding at speed also.Good look from all the angles.The headlight is also better one.It is comfortable for sitting two persons also.Goodlook for all persons.Keep ride better and enjoy.",
+        //     img: 'https://i.ibb.co/Rp1TTJC/yamaha-r15-v4-dark-right-side-view-930x620.webp',
+        //     date: '26-Feb-2022'
+        // },
         {
             title: 'Honda CB Hornet 160R 10,000 KM Test Ride Review',
             details: "Bangladesh Honda Pvt Ltd unveiled the street naked sports bike Honda CB Hornet 160R on 16th February 2018 at ICCB near Purbachol 300 feet. The bike was the first from Honda to enter in the premium segment in Bangladesh with a muscular look and a wider rear tyre. Today I will talk about the 10,000 km riding Experience with Honda CB Hornet 160R.  We have already published the Test Ride Review report after we tested the bike for 2500 km. Now in this article, we will talk about what are the issues we faced in our 10,000 km testing which will further elaborate on the performance of the motorcycle. Muscular fuel tank with attractive graphics,140 section wider rear tyre.,276 mm petal disc brake with Nissin calliper.,X Shaped LED tail light,5- spoke split black alloys wheels,163 cc powerful HET (Honda Eco Technology) engine.,3 step adjustable mono-shock suspension,MF (Maintenance Free) Battery,Viscous air filter.,AHO ( Automation Headlight On),Sealed Chain (From October 2018)",
@@ -31,9 +31,9 @@ const BikeReviews = () => {
 
     ]
     return (
-        <div className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
-            <h2 data-aos="fade-left" data-aos-duration="2000" className='text-xl md:text-2xl font-bold text-center uppercase divider'>Bike Reviews</h2>
-            <div data-aos="fade-right" data-aos-duration="2000" className='pt-5 grid lg:grid-cols-3 gap-5 lg:gap-10'>
+        <div data-aos="fade-right" data-aos-duration="2000" className='px-4 py-7 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
+            <h2 className='text-xl md:text-2xl font-bold text-center uppercase divider'>Bike Reviews</h2>
+            <div className='pt-5 grid lg:grid-cols-3 gap-5 lg:gap-10'>
                 {
                     reviews.map((review, i) =>
                         <div data-aos="zoom-in" data-aos-duration="2000" key={i} className="card w-96 bg-base-100 shadow-xl">
