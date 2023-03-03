@@ -185,7 +185,7 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                     <nav>
-                                        <ul className="space-y-4">
+                                        <ul className="space-y-4 text-center">
                                             <li>
                                                 <NavLink to='/home'
                                                     aria-label="Home"
@@ -195,8 +195,26 @@ const Navbar = () => {
                                                     Home
                                                 </NavLink>
                                             </li>
-                                            {
-                                                user?.uid &&
+                                            <li>
+                                                <NavLink to="/brands"
+                                                    aria-label="brands"
+                                                    title="brands"
+                                                    className="font-medium tracking-wide"
+                                                >
+                                                    Brands
+                                                </NavLink>
+                                            </li>
+
+                                            <li>
+                                                <NavLink to="/reviews"
+                                                    aria-label="reviews"
+                                                    title="reviews" 
+                                                    className="font-medium tracking-wide"
+
+                                                >
+                                                    Reviews
+                                                </NavLink>
+                                            </li>
                                                 <li>
                                                     <NavLink
                                                         to="/dashboard"
@@ -207,7 +225,6 @@ const Navbar = () => {
                                                         Dashboard
                                                     </NavLink>
                                                 </li>
-                                            }
                                             <li>
                                                 <NavLink to='/blog'
                                                     aria-label="Blog"
