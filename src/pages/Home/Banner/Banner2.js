@@ -3,6 +3,7 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import BannerCarousel from './BannerCarousel'
+import { Link } from 'react-router-dom';
 
 export default function Banner2() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -53,12 +54,12 @@ export default function Banner2() {
           Buy or sell your motorcycle with our growing community with optimum advantage and profit.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
-            <a
-              href="/"
+            <Link
+              to="/brands"
               className="rounded-md bg-secondary px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Get started
-            </a>
+            </Link>
             <a href="/aboutus" className="text-base font-semibold leading-7 text-gray-900">
               Learn more <span aria-hidden="true">→</span>
             </a>

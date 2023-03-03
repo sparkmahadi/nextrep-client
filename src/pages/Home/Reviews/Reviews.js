@@ -61,7 +61,7 @@ const Reviews = () => {
                 loading && <div className="custom-align"><Spinner></Spinner></div>
             }
             <div className='pt-5'>
-                <div data-aos="fade-left" className='cursor-pointer'>
+                <div className='cursor-pointer'>
                     <Swiper
                         modules={[Navigation]}
                         navigation
@@ -86,8 +86,8 @@ const Reviews = () => {
 
                             {
                                 reviews?.map((review, i) =>
-                                    <SwiperSlide>
-                                        <div key={i} className="flex flex-col justify-between p-5 rounded shadow-lg h-56 bg-card">
+                                    <SwiperSlide key={i}>
+                                        <div  className="flex flex-col justify-between p-5 rounded shadow-lg h-56 bg-card">
                                             <div className=''>
                                                 <div className='flex justify-between mb-2 items-center'>
                                                     <div className="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-50">
@@ -111,10 +111,10 @@ const Reviews = () => {
             </div>
 
             <div className='mt-5'>
-                <h5 data-aos="fade-left" data-aos-duration="2000" className='text-center text-xl md:text-2xl mb-3 font-semibold'>Add Your Review</h5>
+                <h5  className='text-center text-xl md:text-2xl mb-3 font-semibold'>Add Your Review</h5>
                 {
                     user ?
-                    <form data-aos="fade-right" data-aos-duration="2000" onSubmit={handleAddReview} className='container mx-auto bg-white px-10  rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
+                    <form onSubmit={handleAddReview} className='container mx-auto bg-white px-10  rounded-lg text-gray-900 md:w-2/3 lg:w-1/2'>
 
                         <div className="mb-3">
                             <textarea type="text" name='reviewDetails' id="reviewDetails" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Write your opinions..." required />
@@ -122,7 +122,7 @@ const Reviews = () => {
                         <button type="submit" className="btn btn-sm btn-secondary block mx-auto normal-case">Submit</button>
                     </form>
                     :
-                    <p data-aos="fade-right" data-aos-duration="2000" className='text-center'>Please <Link className='text-sky-600' to={'/login'}>Login</Link> to Add Reviews.</p>
+                    <p className='text-center'>Please <Link className='text-sky-600' to={'/login'}>Login</Link> to Add Reviews.</p>
                 }
             </div>
         </div>

@@ -20,6 +20,8 @@ import Blog from '../pages/Blog/Blog';
 import ReportedItems from '../pages/Dashboard/ReportedItems/ReportedItems';
 import Payment from '../pages/Dashboard/Payment/Payment';
 import Categories from './../pages/Home/Categories/Categories';
+import Search from './../pages/Home/Search/Search';
+import Reviews from './../pages/Home/Reviews/Reviews';
 
 export const router = createBrowserRouter([
     {
@@ -58,6 +60,18 @@ export const router = createBrowserRouter([
             {
                 path: '/blog',
                 element: <Blog></Blog>
+            },
+            {
+                path: '/brands',
+                element: <Categories></Categories>
+            },
+            {
+                path: '/reviews',
+                element: <Reviews></Reviews>
+            },
+            {
+                path: '/search/:searchedText',
+                element: <Search></Search>
             }
         ],
     },

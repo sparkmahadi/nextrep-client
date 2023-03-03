@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
-import { Link, NavLink, useNavigate} from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BiUserCircle } from 'react-icons/bi';
 import { AuthContext } from "../../../contexts/UserContext";
+import SearchOnNav from './../../Home/Search/SearchOnNav';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,7 +19,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="bg-primary font-secondary">
+        <div className="bg-primary font-secondary lg:fixed top-0 right-0 left-0 z-10">
             <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
                 <div className="relative flex items-center justify-between">
                     <Link to='/'
@@ -31,6 +32,9 @@ const Navbar = () => {
                             NextRep
                         </span>
                     </Link>
+
+                    <SearchOnNav></SearchOnNav>
+
                     <ul className="items-center hidden space-x-8 lg:flex">
                         <li>
                             <NavLink
@@ -43,8 +47,37 @@ const Navbar = () => {
                             </NavLink>
                         </li>
 
+                        <li>
+                            <NavLink to='/blog'
+                                aria-label="Blog"
+                                title="Blog"
+                                className="font-medium tracking-wide text-white hover:text-sky-300"
+                            >
+                                Blog
+                            </NavLink>
+                        </li>
+
+                        <li>
+                            <NavLink to="/brands"
+                                aria-label="brands"
+                                title="brands"
+                                className="font-medium tracking-wide text-white hover:text-sky-300"
+                            >
+                                Brands
+                            </NavLink>
+                        </li>
+
+                        <li>
+                            <NavLink to="/reviews"
+                                aria-label="reviews"
+                                title="reviews"
+                                className="font-medium tracking-wide text-white hover:text-sky-300"
+                            >
+                                Reviews
+                            </NavLink>
+                        </li>
+
                         {
-                            user?.uid &&
                             <li>
                                 <NavLink
                                     to="/dashboard"
@@ -58,16 +91,7 @@ const Navbar = () => {
                         }
 
                         <li>
-                            <NavLink to='/blog'
-                                aria-label="Blog"
-                                title="Blog"
-                                className="font-medium tracking-wide text-white hover:text-sky-300"
-                            >
-                                Blog
-                            </NavLink>
-                        </li>
-                        <li>
-                            <div to='/login'
+                            <div
 
                             >
                                 {
@@ -77,7 +101,7 @@ const Navbar = () => {
                                                 {
                                                     user?.photoURL ?
                                                         <div className="flex items-center" title={user?.displayName ? user.displayName : 'No Name'}>
-                                                            <img className="max-w-8 max-h-8 mr-2 border border-sky-300" src={user?.photoURL} alt="" />
+                                                            <img className="max-w-8 max-h-8 border border-sky-300" src={user?.photoURL} alt="" />
                                                         </div>
                                                         :
                                                         <div className="flex items-center" title={user?.displayName ? user.displayName : 'No Name'}>
@@ -85,11 +109,11 @@ const Navbar = () => {
                                                         </div>
                                                 }
                                             </Link>
-                                            <button className="btn btn-sm btn-secondary normal-case" onClick={handleLogOut}>Log Out</button>
+                                            <button className="font-medium tracking-wide text-white hover:text-sky-300 border px-2 py-[3.2px]" onClick={handleLogOut}>Log Out</button>
                                         </div>
                                         :
                                         <>
-                                            <Link to='/login' className="btn btn-sm btn-secondary normal-case">Log In</Link>
+                                            <Link to='/login' className="font-medium tracking-wide text-white hover:text-sky-300">Log In</Link>
                                         </>
                                 }
                             </div>
@@ -143,7 +167,7 @@ const Navbar = () => {
                             <div className="absolute top-0 left-0 w-full z-10">
                                 <div className="p-5 bg-white border rounded shadow-sm nav-mobile-menu">
                                     <div className="flex items-center justify-between mb-4">
-                                        
+
                                         <div>
                                             <button
                                                 aria-label="Close Menu"
@@ -212,7 +236,7 @@ const Navbar = () => {
                                             </li>
                                         </ul>
                                     </nav>
-                                    
+
                                 </div>
                             </div>
                         )}

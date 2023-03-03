@@ -17,6 +17,14 @@ const navigation = [
     { name: 'Blog', href: '/blog', current: false },
     { name: 'Calendar', href: '#', current: false },
 ]
+
+const hashNavs = [
+    { name: 'Brands', href: '#brands', current: false },
+    { name: 'Reviews', href: '#reviews', current: false },
+    { name: 'BikeReviews', href: '#bikereviews', current: false },
+    { name: 'Calendar', href: '#', current: false },
+]
+
 const userNavigation = [
     { name: 'Your Profile', href: '#' },
     { name: 'Settings', href: '#' },

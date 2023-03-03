@@ -28,8 +28,8 @@ const Categories = () => {
                 loading && <div className="custom-align"><Spinner></Spinner></div>
             }
             <h2 className='text-xl md:text-2xl font-bold text-center uppercase divider'>Brands</h2>
-            <p className='md:text-xl text-center my-3'>Please Select Your Favorite Brand</p>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6'>
+            {/* <p className='md:text-xl text-center my-3'>Please Select Your Favorite Brand</p> */}
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 pt-3'>
 
                 {
                     categories?.map(category => <CategoriesDetails key={category._id} category={category}></CategoriesDetails>)

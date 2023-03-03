@@ -10,7 +10,7 @@ const Main = () => {
         <div>
             <Navbar></Navbar>
             {/* <NewNavbar></NewNavbar> */}
-            <div className='my-outlet min-h-screen'><Outlet></Outlet></div>
+            <div className='my-outlet min-h-screen pt-20'><Outlet></Outlet></div>
             <Footer></Footer>
         </div>
     );

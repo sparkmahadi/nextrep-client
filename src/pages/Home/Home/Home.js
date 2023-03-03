@@ -8,7 +8,6 @@ import Categories from '../Categories/Categories';
 import HowItWorks from '../HowItWorks/HowItWorks';
 import PowerfulBike from '../PowerfulBike/PowerfulBike';
 import Reviews from '../Reviews/Reviews';
-import Search from '../Search/Search';
 
 const Home = () => {
     return (
@@ -19,7 +18,6 @@ const Home = () => {
             {/* <Banner></Banner> */}
             <Banner2></Banner2>
             <Categories></Categories>
-            <Search></Search>
             <AdertisedItems></AdertisedItems>
             <HowItWorks></HowItWorks>
             <Reviews></Reviews>
