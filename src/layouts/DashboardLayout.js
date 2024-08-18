@@ -19,7 +19,7 @@ const DashboardLayout = () => {
                 <title>NextRep | Dashboard</title>
             </Helmet>
             <Toaster></Toaster>
-            <div className='custom-grid lg:grid gap-5 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
+            <div className='custom-grid lg:grid gap-5 px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:mt-20'>
                 <div data-aos="fade-up"
                     data-aos-duration="2000" className='mx-auto'>
                     <ul className="menu bg-base-100 sm:w-56 mx-auto">

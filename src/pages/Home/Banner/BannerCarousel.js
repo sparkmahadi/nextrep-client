@@ -5,7 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 const BannerCarousel = () => {
     return (
         <div>
-            <Carousel autoPlay={true} infiniteLoop={true} interval={5000} transitionTime={1000} showThumbs={false} showStatus={false} showArrows={false}>
+            <Carousel autoPlay={true} infiniteLoop={true} interval={3000} transitionTime={1000} showThumbs={false} showStatus={false} showArrows={false}>
                 <div>
                     <img src="https://i.ibb.co/7j9chXC/kawasaki-ninja.png" alt=''/>
                 </div>
